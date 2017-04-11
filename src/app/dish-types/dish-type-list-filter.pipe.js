@@ -13,7 +13,7 @@ var DishTypeListFilterPipe = (function () {
         filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
         return filterBy
             ? value.filter(function (dishTypeItem) {
-                return dishTypeItem.Name.toLocaleLowerCase().indexOf(filterBy) !== -1;
+                return dishTypeItem.name.toLocaleLowerCase().indexOf(filterBy) !== -1;
             })
             : value;
     };

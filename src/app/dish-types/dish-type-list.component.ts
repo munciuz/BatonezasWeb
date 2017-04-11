@@ -10,24 +10,26 @@ import { DishTypeService } from "./dish-type.service";
     styleUrls: ['./dish-type-list.components.css']
 })
 
-export class DishTypeListComponent implements OnInit{
+export class DishTypeListComponent implements OnInit {
     pageTitle: string = 'Dish Type List';
     filter: string = '';
+    errorMessage: string;
     showImage: boolean = true;
     dishTypes: IDishTypeListItem[];
 
-    constructor(private dishTypeService: DishTypeService){ }
+    constructor(private dishTypeService: DishTypeService) { }
 
     ngOnInit(): void {
-        console.log('just test');
-        this.dishTypes = this.dishTypeService.getDishTypeList();
+        this.dishTypeService.getDishTypeList()
+            .subscribe(dishTypes => this.dishTypes = dishTypes,
+            error => this.errorMessage = <any>error);
     }
 
     toggleShowImage(): void {
         this.showImage = !this.showImage;
     }
 
-    onRatingClicked(message: string): void{
+    onRatingClicked(message: string): void {
         console.log(message);
     }
 }

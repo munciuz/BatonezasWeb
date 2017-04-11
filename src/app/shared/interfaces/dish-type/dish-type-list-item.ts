@@ -1,6 +1,7 @@
 export interface IDishTypeListItem {
-    Id: number;
-    Name: string;
-    IsValid: boolean;
-    TempImgUrl: string;
+    id: number;
+    name: string;
+    isValid: boolean;
+    createdByUser: string;
+    createdDateTime: Date;
 }

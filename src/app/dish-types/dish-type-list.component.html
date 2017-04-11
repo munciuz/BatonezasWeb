@@ -28,17 +28,25 @@
             <table class='table'>
                 <thead>
                     <tr>
-                        <th>
+                        <!--<th>
                             <button class='btn btn-primary' (click)='toggleShowImage()'>
                                 {{showImage ? 'Hide' : 'Show'}} Image
                             </button>
-                        </th>
+                        </th>-->
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Created By User</th>
+                        <th>Created Date</th>
+                        <th>Is Valid</th>                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let dishType of dishTypes | dishTypeListPipe: filter'>
+                        <td>{{dishType.id}}</td>
+                        <td>{{dishType.name}}</td>
+                        <td>{{dishType.createdByUser}}</td>
+                        <td>{{dishType.createdDateTime | date:shortDate}}</td>
+                        <td>{{dishType.isValid}}</td>
                         <!--<td>
                             <img *ngIf='showImage' [src]='product.imageUrl' [title]='product.productName | uppercase' [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                         </td>
@@ -46,13 +54,13 @@
                             {{product.productName}}
                             </a>
                         </td>-->
-                        <td>
+                        <!--<td>
                             <img *ngIf='showImage' [src]='dishType.TempImgUrl' [title]='dishType.Name' style='width: 100px; height: auto;'>
                         </td>
                         <td>
                             <comp-star [rating]='dishType.Id' (ratingClicked)='onRatingClicked($event)'></comp-star>
                         </td>
-                        <td>{{ dishType.Name | lowercase }}</td>
+                        <td>{{ dishType.Name | lowercase }}</td>-->
                         <!--<td>
                             <ai-star [rating]='product.starRating' (ratingClicked)='onRatingClicked($event)'>
                             </ai-star>

@@ -5,38 +5,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/operator/do");
 var DishTypeService = (function () {
-    function DishTypeService() {
+    function DishTypeService(http) {
+        this.http = http;
+        this.dishTypeUrl = 'http://localhost/batonezasapi/dishtype/getall';
     }
     DishTypeService.prototype.getDishTypeList = function () {
-        var dishTypeList = [
-            {
-                Id: 1,
-                Name: 'Dish Type 1',
-                IsValid: true,
-                TempImgUrl: 'http://www.saladworks.com/sites/default/files/Sandwich-AvocadoBLT.jpg'
-            },
-            {
-                Id: 2,
-                Name: 'Dish Type 2',
-                IsValid: true,
-                TempImgUrl: 'http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4150.png'
-            },
-            {
-                Id: 3,
-                Name: 'Dish Type 3',
-                IsValid: true,
-                TempImgUrl: 'http://indianhealthyrecipes.com/wp-content/uploads/2016/11/vegetable-curd-sandwich-recipe.jpg'
-            }
-        ];
-        return dishTypeList;
+        return this.http.get(this.dishTypeUrl)
+            .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log(JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    DishTypeService.prototype.handleError = function (error) {
+        console.error(error);
+        return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     return DishTypeService;
 }());
 DishTypeService = __decorate([
-    core_1.Component({}),
-    core_1.Injectable()
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
 ], DishTypeService);
 exports.DishTypeService = DishTypeService;
 //# sourceMappingURL=dish-type.service.js.map

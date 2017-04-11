@@ -12,7 +12,7 @@ export class DishTypeListFilterPipe implements PipeTransform {
 
         return filterBy
             ? value.filter((dishTypeItem: IDishTypeListItem) =>
-                dishTypeItem.Name.toLocaleLowerCase().indexOf(filterBy) !== -1)
+                dishTypeItem.name.toLocaleLowerCase().indexOf(filterBy) !== -1)
             : value;
     }
 }

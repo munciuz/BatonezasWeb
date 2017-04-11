@@ -18,8 +18,9 @@ var DishTypeListComponent = (function () {
         this.showImage = true;
     }
     DishTypeListComponent.prototype.ngOnInit = function () {
-        console.log('just test');
-        this.dishTypes = this.dishTypeService.getDishTypeList();
+        var _this = this;
+        this.dishTypeService.getDishTypeList()
+            .subscribe(function (dishTypes) { return _this.dishTypes = dishTypes; }, function (error) { return _this.errorMessage = error; });
     };
     DishTypeListComponent.prototype.toggleShowImage = function () {
         this.showImage = !this.showImage;

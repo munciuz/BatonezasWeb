@@ -1,33 +1,30 @@
-import { Component, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+
 import { IDishTypeListItem } from "../shared/interfaces/dish-type/dish-type-list-item";
 
-@Component({})
 @Injectable()
 
 export class DishTypeService {
 
-    getDishTypeList() : IDishTypeListItem[] {
-        let dishTypeList: IDishTypeListItem[] = [
-        {
-            Id: 1,
-            Name: 'Dish Type 1',
-            IsValid: true,
-            TempImgUrl: 'http://www.saladworks.com/sites/default/files/Sandwich-AvocadoBLT.jpg'
-        },
-        {
-            Id: 2,
-            Name: 'Dish Type 2',
-            IsValid: true,
-            TempImgUrl: 'http://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4150.png'
-        },
-        {
-            Id: 3,
-            Name: 'Dish Type 3',
-            IsValid: true,
-            TempImgUrl: 'http://indianhealthyrecipes.com/wp-content/uploads/2016/11/vegetable-curd-sandwich-recipe.jpg'
-        }
-    ];
+    private dishTypeUrl: string = 'http://localhost/batonezasapi/dishtype/getall';
 
-    return dishTypeList;
+    constructor(private http: Http){}
+
+    getDishTypeList() : Observable<IDishTypeListItem[]> {
+        return this.http.get(this.dishTypeUrl)
+            .map((response: Response) => <IDishTypeListItem[]> response.json())
+            .do(data => console.log(JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    private handleError(error: Response){
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+
     }
 }
