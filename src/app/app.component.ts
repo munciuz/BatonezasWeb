@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { DishTypeService } from "./dish-types/dish-type.service";
 
 @Component({
-    selector: 'batonezas-app',
+    selector: 'bat-app',
     moduleId: module.id,
-    templateUrl: './app.component.html'
+    templateUrl: './app.component.html',
+    providers: [DishTypeService]
 })
-export class AppComponent { }
+export class AppComponent { 
+    randomTitle: string = "Just a Random Title";
+}
