@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
-import { IDishTypeListItem } from "../shared/interfaces/dish-type/dish-type-list-item";
+import { IDishTypeListItem } from "./dish-type-list-item";
 import { DishTypeService } from "./dish-type.service";
 
 @Component({
     moduleId: module.id,
-    selector: 'bat-dish-type-list',
+    // selector: 'bat-dish-type-list',
     templateUrl: './dish-type-list.component.html',
     styleUrls: ['./dish-type-list.components.css']
 })

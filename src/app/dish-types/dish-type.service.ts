@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-import { IDishTypeListItem } from "../shared/interfaces/dish-type/dish-type-list-item";
+import { IDishTypeListItem } from "./dish-type-list-item";
 
 @Injectable()
 

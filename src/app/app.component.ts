@@ -8,5 +8,5 @@ import { DishTypeService } from "./dish-types/dish-type.service";
     providers: [DishTypeService]
 })
 export class AppComponent { 
-    randomTitle: string = "Just a Random Title";
+    randomTitle: string = "Batonezas";
 }

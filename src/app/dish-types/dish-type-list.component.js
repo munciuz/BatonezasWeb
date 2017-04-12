@@ -33,7 +33,7 @@ var DishTypeListComponent = (function () {
 DishTypeListComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'bat-dish-type-list',
+        // selector: 'bat-dish-type-list',
         templateUrl: './dish-type-list.component.html',
         styleUrls: ['./dish-type-list.components.css']
     }),

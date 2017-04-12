@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { IDishTypeListItem } from "../shared/interfaces/dish-type/dish-type-list-item";
+import { IDishTypeListItem } from "./dish-type-list-item";
 
 @Pipe({
     name: 'dishTypeListPipe'

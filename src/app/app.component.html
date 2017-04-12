@@ -1,2 +1,9 @@
 <h2>{{randomTitle}}</h2>
-<bat-dish-type-list></bat-dish-type-list>
+<div class="row">
+    <ul class="nav navbar-nav">
+    <li><a [routerLink]="['/welcome']">Home</a></li>
+    <li><a [routerLink]="['/dishTypes']">Dish Types</a></li>
+</ul>
+</div>
+
+<router-outlet></router-outlet>

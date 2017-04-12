@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 
-import { AppComponent }  from './app.component';
-import { DishTypeListComponent }  from './dish-types/dish-type-list.component';
-import { DishTypeListFilterPipe } from './dish-types/dish-type-list-filter.pipe';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-routing.module";
 
-import { StarComponent } from "./shared/star.component";
+import { DishTypeModule } from "./dish-types/dish-type.module";
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule, HttpModule ],
-  declarations: [ 
-    AppComponent, 
-    DishTypeListComponent, 
-    DishTypeListFilterPipe,
-    StarComponent ],
-  bootstrap: [ AppComponent ]
+  imports: [
+    BrowserModule,
+    HttpModule,
+    DishTypeModule,
+    AppRoutingModule    
+  ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
