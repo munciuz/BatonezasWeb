@@ -7,11 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var dish_type_list_component_1 = require("./dish-type-list.component");
-var dish_type_list_filter_pipe_1 = require("./dish-type-list-filter.pipe");
-var dish_type_detail_component_1 = require("./dish-type-detail.component");
+var dish_type_list_component_1 = require("./dish-type-list/dish-type-list.component");
+var dish_type_list_filter_pipe_1 = require("./dish-type-list/dish-type-list-filter.pipe");
+var dish_type_component_1 = require("./dish-type/dish-type.component");
 var dish_type_service_1 = require("./dish-type.service");
-var dish_type_guard_service_1 = require("./dish-type-guard.service");
+var dish_type_guard_service_1 = require("./dish-type-list/dish-type-guard.service");
+var apis_1 = require("../shared/apis");
 var shared_module_1 = require("../shared/shared.module");
 var DishTypeModule = (function () {
     function DishTypeModule() {
@@ -22,17 +23,17 @@ DishTypeModule = __decorate([
     core_1.NgModule({
         declarations: [
             dish_type_list_component_1.DishTypeListComponent,
-            dish_type_detail_component_1.DishTypeDetailComponent,
+            dish_type_component_1.DishTypeComponent,
             dish_type_list_filter_pipe_1.DishTypeListFilterPipe
         ],
         imports: [
             shared_module_1.SharedModule,
             router_1.RouterModule.forChild([
                 { path: 'dishTypes', component: dish_type_list_component_1.DishTypeListComponent },
-                { path: 'dishtype/:id', canActivate: [dish_type_guard_service_1.DishTypeGuard], component: dish_type_detail_component_1.DishTypeDetailComponent }
+                { path: 'dishtype/:id', canActivate: [dish_type_guard_service_1.DishTypeGuard], component: dish_type_component_1.DishTypeComponent }
             ])
         ],
-        providers: [dish_type_service_1.DishTypeService, dish_type_guard_service_1.DishTypeGuard]
+        providers: [dish_type_service_1.DishTypeService, dish_type_guard_service_1.DishTypeGuard, apis_1.Apis]
     })
 ], DishTypeModule);
 exports.DishTypeModule = DishTypeModule;

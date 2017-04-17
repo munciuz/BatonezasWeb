@@ -14,38 +14,26 @@ var Observable_1 = require("rxjs/Observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
-var apis_1 = require("../shared/apis");
 var DishTypeService = (function () {
-    function DishTypeService(http, apis) {
+    function DishTypeService(http) {
         this.http = http;
-        this.apis = apis;
         this.dishTypeUrl = 'http://localhost/batonezasapi/dishtype/getall';
     }
     DishTypeService.prototype.getDishTypeList = function () {
-        return this.http.get(this.apis.Dishtype.GetAll)
+        return this.http.get(this.dishTypeUrl)
             .map(function (response) { return response.json(); })
+            .do(function (data) { return console.log(JSON.stringify(data)); })
             .catch(this.handleError);
-    };
-    DishTypeService.prototype.getDishType = function (id) {
-        return this.http.get(this.apis.Dishtype.Get + id)
-            .map(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    DishTypeService.prototype.editDishType = function (dishType) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apis.Dishtype.Edit, dishType, headers)
-            .map(function (res) { return res.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
     };
     DishTypeService.prototype.handleError = function (error) {
+        console.error(error);
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     return DishTypeService;
 }());
 DishTypeService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, apis_1.Apis])
+    __metadata("design:paramtypes", [http_1.Http])
 ], DishTypeService);
 exports.DishTypeService = DishTypeService;
 //# sourceMappingURL=dish-type.service.js.map

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var dish_type_service_1 = require("./dish-type.service");
+var dish_type_service_1 = require("../dish-type.service");
 var DishTypeListComponent = (function () {
     function DishTypeListComponent(dishTypeService) {
         this.dishTypeService = dishTypeService;

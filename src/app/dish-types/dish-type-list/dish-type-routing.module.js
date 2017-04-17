@@ -7,11 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var dish_type_list_component_1 = require("./dish-type-list/dish-type-list.component");
-var dish_type_detail_component_1 = require("./dish-type-list/dish-type-detail.component");
-var dish_type_component_1 = require("./dish-type/dish-type.component");
-var dish_type_guard_service_1 = require("./dish-type-list/dish-type-guard.service");
-var shared_module_1 = require("../shared/shared.module");
+var dish_type_list_component_1 = require("./dish-type-list.component");
+var dish_type_detail_component_1 = require("./dish-type-detail.component");
+var dish_type_guard_service_1 = require("./dish-type-guard.service");
+var shared_module_1 = require("../../shared/shared.module");
 var DishTypeRoutingModule = (function () {
     function DishTypeRoutingModule() {
     }
@@ -22,13 +21,12 @@ DishTypeRoutingModule = __decorate([
         declarations: [
             dish_type_list_component_1.DishTypeListComponent,
             dish_type_detail_component_1.DishTypeDetailComponent,
-            dish_type_component_1.DishTypeComponent
         ],
         imports: [
             shared_module_1.SharedModule,
             router_1.RouterModule.forChild([
                 { path: 'dishTypes', component: dish_type_list_component_1.DishTypeListComponent },
-                { path: 'dishtype/:id', canActivate: [dish_type_guard_service_1.DishTypeGuard], component: dish_type_component_1.DishTypeComponent }
+                { path: 'dishtype/:id', canActivate: [dish_type_guard_service_1.DishTypeGuard], component: dish_type_detail_component_1.DishTypeDetailComponent }
             ])
         ],
         providers: [dish_type_guard_service_1.DishTypeGuard],

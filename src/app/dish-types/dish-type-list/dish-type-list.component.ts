@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { IDishTypeListItem } from "./dish-type-list-item";
-import { DishTypeService } from "./dish-type.service";
+import { DishTypeService } from "../dish-type.service";
 
 @Component({
     moduleId: module.id,
