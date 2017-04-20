@@ -15,36 +15,43 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 var apis_1 = require("../shared/apis");
-var DishTypeService = (function () {
-    function DishTypeService(http, apis) {
+var TagService = (function () {
+    function TagService(http, apis) {
         this.http = http;
         this.apis = apis;
     }
-    DishTypeService.prototype.getDishTypeList = function () {
-        return this.http.get(this.apis.Dishtype.GetAll)
+    TagService.prototype.getTagList = function () {
+        return this.http.get(this.apis.Tag.GetAll)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    DishTypeService.prototype.getDishType = function (id) {
-        return this.http.get(this.apis.Dishtype.Get + id)
+    TagService.prototype.getTag = function (id) {
+        return this.http.get(this.apis.Tag.Get + id)
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    DishTypeService.prototype.editDishType = function (dishType) {
+    TagService.prototype.createTag = function (tag) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apis.Dishtype.Edit, dishType, headers)
+        return this.http.post(this.apis.Tag.Create, tag, headers)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
     };
-    DishTypeService.prototype.handleError = function (error) {
+    TagService.prototype.editTag = function (dishType) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.apis.Tag.Edit, dishType, headers)
+            .map(function (res) { return res.json(); })
+            .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
+    };
+    TagService.prototype.handleError = function (error) {
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
-    return DishTypeService;
+    return TagService;
 }());
-DishTypeService = __decorate([
+TagService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http, apis_1.Apis])
-], DishTypeService);
-exports.DishTypeService = DishTypeService;
-//# sourceMappingURL=dish-type.service.js.map
+], TagService);
+exports.TagService = TagService;
+//# sourceMappingURL=tag.service.js.map

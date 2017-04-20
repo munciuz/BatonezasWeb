@@ -11,6 +11,7 @@ var http_1 = require("@angular/http");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var dish_type_module_1 = require("./dish-types/dish-type.module");
+var tag_module_1 = require("./tags/tag.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,6 +23,7 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             http_1.HttpModule,
             dish_type_module_1.DishTypeModule,
+            tag_module_1.TagModule,
             app_routing_module_1.AppRoutingModule
         ],
         declarations: [app_component_1.AppComponent],

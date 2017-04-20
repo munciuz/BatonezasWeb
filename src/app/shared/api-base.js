@@ -6,24 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var forms_1 = require("@angular/forms");
-var star_component_1 = require("./star.component");
-var SharedModule = (function () {
-    function SharedModule() {
+var http_1 = require("@angular/http");
+var ApiBase = (function () {
+    function ApiBase() {
     }
-    return SharedModule;
+    ApiBase.prototype.GetHeaders = function () {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        return headers;
+    };
+    return ApiBase;
 }());
-SharedModule = __decorate([
-    core_1.NgModule({
-        declarations: [star_component_1.StarComponent],
-        imports: [common_1.CommonModule],
-        exports: [
-            common_1.CommonModule,
-            forms_1.FormsModule,
-            star_component_1.StarComponent,
-        ]
-    })
-], SharedModule);
-exports.SharedModule = SharedModule;
-//# sourceMappingURL=shared.module.js.map
+ApiBase = __decorate([
+    core_1.Injectable()
+], ApiBase);
+exports.ApiBase = ApiBase;
+//# sourceMappingURL=api-base.js.map

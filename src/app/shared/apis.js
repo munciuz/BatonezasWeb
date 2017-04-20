@@ -10,16 +10,23 @@ var Apis = (function () {
     function Apis() {
         this.baseUrl = 'http://localhost/batonezasapi/';
         this.dishType = 'dishType/';
+        this.tag = 'tag/';
         this.get = 'get/';
         this.getAll = 'getAll/';
-        this.create = '/Create';
+        this.create = 'Create/';
         this.edit = 'edit/';
-        this.delete = 'delete';
+        this.delete = 'delete/';
         this.Dishtype = {
             Get: this.baseUrl + this.dishType + this.get,
             GetAll: this.baseUrl + this.dishType + this.getAll,
             Create: this.baseUrl + this.dishType + this.create,
             Edit: this.baseUrl + this.dishType + this.edit
+        };
+        this.Tag = {
+            Get: this.baseUrl + this.tag + this.get,
+            GetAll: this.baseUrl + this.tag + this.getAll,
+            Create: this.baseUrl + this.tag + this.create,
+            Edit: this.baseUrl + this.tag + this.edit
         };
     }
     return Apis;
