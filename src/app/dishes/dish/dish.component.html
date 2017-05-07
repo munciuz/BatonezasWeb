@@ -20,10 +20,8 @@
             </div>
         </div>
         <div>
-            <button *ngFor="let tag of allTags" type="button" [class]="getTagButtonClass(tag.id)">{{tag.name}}</button>
+            <button *ngFor="let tag of allTags" type="button" [class]="getTagButtonClass(tag.id)" (click)="tagToggled(tag)">{{tag.name}}</button>
         </div>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-success btn-outline">success</button>
     </div>
 
     <div class="panel-footer">

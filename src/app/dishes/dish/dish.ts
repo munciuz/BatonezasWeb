@@ -1,9 +1,9 @@
-import { ITag } from "../../tags/tag/tag";
+import { ITagListItem } from "../../tags/tag-list/tag-list-item";
 
 export interface IDish {
     id: number;
     name: string;
-    selectedTags: ITag[];
-    allTags: ITag[];
+    selectedTags: ITagListItem[];
+    allTags: ITagListItem[];
     isValid: boolean;
 }

@@ -16,8 +16,9 @@ div.panel-heading {
 }
 
 /*Bootstrap button outline override*/
-.btn {
+.btn-success {
     margin: 2px;
+    border-color: #6DB18D;
 }
 
 .btn-outline {

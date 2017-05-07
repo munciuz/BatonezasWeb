@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var dish_service_1 = require("../dish.service");
+var tag_service_1 = require("../../tags/tag.service");
 // import * as _ from 'lodash';
 var DishComponent = (function () {
-    function DishComponent(route, router, service) {
+    function DishComponent(route, router, service, tagService) {
         this.route = route;
         this.router = router;
         this.service = service;
+        this.tagService = tagService;
         this.name = '';
         this.selectedTags = [];
         this.allTags = [];
@@ -35,8 +37,13 @@ var DishComponent = (function () {
                     _this.isValid = _this.dish.isValid;
                     _this.selectedTags = _this.dish.selectedTags;
                     _this.allTags = _this.dish.allTags;
-                    console.log(dish);
                 }, function (error) { return _this.errorMessage = error; });
+            }
+            else {
+                _this.tagService.getTagList()
+                    .subscribe(function (tags) {
+                    _this.allTags = tags;
+                });
             }
         });
     };
@@ -68,7 +75,38 @@ var DishComponent = (function () {
     };
     DishComponent.prototype.getTagButtonClass = function (tagId) {
         var buttonClass = 'btn btn-success';
+        if (!this.isTagSelected(tagId)) {
+            buttonClass += ' btn-outline';
+        }
         return buttonClass;
+    };
+    DishComponent.prototype.tagToggled = function (tag) {
+        console.log('tag toggled: ', tag);
+        if (this.isTagSelected(tag.id)) {
+            var index = this.tagIndex(tag.id);
+            if (index > -1) {
+                this.selectedTags.splice(index, 1);
+            }
+        }
+        else {
+            this.selectedTags.push(tag);
+        }
+    };
+    DishComponent.prototype.tagIndex = function (tagId) {
+        for (var i = 0; i < this.selectedTags.length; i++) {
+            if (this.selectedTags[i].id === tagId) {
+                return i;
+            }
+        }
+        return -1;
+    };
+    DishComponent.prototype.isTagSelected = function (tagId) {
+        for (var i = 0; i < this.selectedTags.length; i++) {
+            if (this.selectedTags[i].id === tagId) {
+                return true;
+            }
+        }
+        return false;
     };
     return DishComponent;
 }());
@@ -79,7 +117,8 @@ DishComponent = __decorate([
     }),
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router,
-        dish_service_1.DishService])
+        dish_service_1.DishService,
+        tag_service_1.TagService])
 ], DishComponent);
 exports.DishComponent = DishComponent;
 //# sourceMappingURL=dish.component.js.map
