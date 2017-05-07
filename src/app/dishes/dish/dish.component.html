@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <label>Patiekalas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input [(ngModel)]='name' class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <label>Aktyvus</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="checkbox" [checked]="isValid" (change)="isValid = !isValid" />
+            </div>
+        </div>
+        <div>
+            <button *ngFor="let tag of allTags" type="button" [class]="getTagButtonClass(tag.id)">{{tag.name}}</button>
+        </div>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-success btn-outline">success</button>
+    </div>
+
+    <div class="panel-footer">
+        <input type="button" value="Išsaugoti" class="btn" (click)='onSave()'>
+        <input type="button" value="Atgal" class="btn" (click)='onBackClicked()'>
+    </div>
+</div>

@@ -12,6 +12,7 @@ var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var dish_type_module_1 = require("./dish-types/dish-type.module");
 var tag_module_1 = require("./tags/tag.module");
+var dish_module_1 = require("./dishes/dish.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,6 +25,7 @@ AppModule = __decorate([
             http_1.HttpModule,
             dish_type_module_1.DishTypeModule,
             tag_module_1.TagModule,
+            dish_module_1.DishModule,
             app_routing_module_1.AppRoutingModule
         ],
         declarations: [app_component_1.AppComponent],

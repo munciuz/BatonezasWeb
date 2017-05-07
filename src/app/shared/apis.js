@@ -9,8 +9,10 @@ var core_1 = require("@angular/core");
 var Apis = (function () {
     function Apis() {
         this.baseUrl = 'http://localhost/batonezasapi/';
+        // private baseUrl: string = 'http://munciuz-001-site1.etempurl.com/';
         this.dishType = 'dishType/';
         this.tag = 'tag/';
+        this.dish = 'dish/';
         this.get = 'get/';
         this.getAll = 'getAll/';
         this.create = 'Create/';
@@ -27,6 +29,12 @@ var Apis = (function () {
             GetAll: this.baseUrl + this.tag + this.getAll,
             Create: this.baseUrl + this.tag + this.create,
             Edit: this.baseUrl + this.tag + this.edit
+        };
+        this.Dish = {
+            Get: this.baseUrl + this.dish + this.get,
+            GetAll: this.baseUrl + this.dish + this.getAll,
+            Create: this.baseUrl + this.dish + this.create,
+            Edit: this.baseUrl + this.dish + this.edit
         };
     }
     return Apis;

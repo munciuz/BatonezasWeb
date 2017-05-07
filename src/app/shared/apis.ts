@@ -4,8 +4,10 @@ import { Injectable } from "@angular/core";
 
 export class Apis {
     private baseUrl: string = 'http://localhost/batonezasapi/';
+    // private baseUrl: string = 'http://munciuz-001-site1.etempurl.com/';
     private dishType: string = 'dishType/';
     private tag: string = 'tag/';
+    private dish: string = 'dish/';
 
     private get: string = 'get/';
     private getAll: string = 'getAll/';
@@ -25,5 +27,12 @@ export class Apis {
         GetAll: this.baseUrl + this.tag + this.getAll,
         Create: this.baseUrl + this.tag + this.create,
         Edit: this.baseUrl + this.tag + this.edit
+    };
+
+    public Dish = {
+        Get: this.baseUrl + this.dish + this.get,
+        GetAll: this.baseUrl + this.dish + this.getAll,
+        Create: this.baseUrl + this.dish + this.create,
+        Edit: this.baseUrl + this.dish + this.edit
     };
 }

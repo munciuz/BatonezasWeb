@@ -1,0 +1,37 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+
+    <div class="panel-body">
+        <button type="button" class="btn btn-default btn-sm" [routerLink]="['/dish', 0]">
+          <span class="glyphicon glyphicon-plus"></span> Pridėti
+        </button>
+        <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Created By User</th>
+                        <th>Created Date</th>
+                        <th>Is Valid</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let dish of dishList'>
+                        <td>{{dish.id}}</td>
+                        <td>
+                            <a [routerLink]="['/dish', dish.id]">{{dish.name}}</a>
+                        </td>
+                        <td>{{dish.createdByUser}}</td>
+                        <td>{{dish.createdDateTime | date:shortDate}}</td>
+                        <td>{{dish.isValid}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
