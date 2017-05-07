@@ -23,4 +23,10 @@ export class DishListComponent implements OnInit {
             .subscribe(dishes => this.dishList = dishes,
             error => this.errorMessage = <any>error);
     }
+
+    getTableRowClass(dishListItem: IDishListItem): string{
+        var className = 'invalid';
+
+        return className;
+    }
 }

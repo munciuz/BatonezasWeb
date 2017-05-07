@@ -8,6 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { DishTypeModule } from "./dish-types/dish-type.module";
 import { TagModule } from "./tags/tag.module";
 import { DishModule } from "./dishes/dish.module";
+import { UserModule } from "./users/user.module";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { DishModule } from "./dishes/dish.module";
     DishTypeModule,
     TagModule,
     DishModule,
+    UserModule,
     AppRoutingModule    
   ],
   declarations: [AppComponent],

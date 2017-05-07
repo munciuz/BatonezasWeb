@@ -13,6 +13,14 @@
         </div>
         <div class="row">
             <div class="col-md-1 col-sm-2 col-xs-3">
+                <label>Patvirtintas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="checkbox" [checked]="isConfirmed" (change)="isConfirmed = !isConfirmed" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-3">
                 <label>Aktyvus</label>
             </div>
             <div class="col-md-3 col-xs-9">

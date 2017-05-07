@@ -23,6 +23,7 @@ export class DishComponent implements OnInit {
     dish: IDish;
     errorMessage: string;
     isValid: boolean = false;
+    isConfirmed: boolean = false;
     result: any;
 
     private sub: Subscription
@@ -44,6 +45,7 @@ export class DishComponent implements OnInit {
                             this.dish = dish;
                             this.name = this.dish.name;
                             this.isValid = this.dish.isValid;
+                            this.isConfirmed = this.dish.isConfirmed;
                             this.selectedTags = this.dish.selectedTags;
                             this.allTags = this.dish.allTags;
                         },
@@ -67,6 +69,7 @@ export class DishComponent implements OnInit {
             name: this.name,
             id: this.dishId,
             isValid: this.isValid,
+            isConfirmed: this.isConfirmed,
             selectedTags: this.selectedTags,
             allTags: null
         }

@@ -3,10 +3,23 @@
         {{pageTitle}}
     </div>
     <div class="panel-body">
-        <label>Žymė:</label>
-        <input [(ngModel)]='name' class="form-control">
-        <label>Validi:</label>
-        <input [ngModel]='isValid' class="form-control">
+
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <label>Žymė</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input [(ngModel)]='name' class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-3">
+                <label>Aktyvi</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="checkbox" [checked]="isValid" (change)="isValid = !isValid" />
+            </div>
+        </div>
     </div>
     <div class="panel-footer">
         <input type="button" value="Išsaugoti" class="btn" (click)='onSave()'>

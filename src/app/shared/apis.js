@@ -13,6 +13,8 @@ var Apis = (function () {
         this.dishType = 'dishType/';
         this.tag = 'tag/';
         this.dish = 'dish/';
+        this.user = 'user/';
+        this.role = 'role/';
         this.get = 'get/';
         this.getAll = 'getAll/';
         this.create = 'Create/';
@@ -35,6 +37,15 @@ var Apis = (function () {
             GetAll: this.baseUrl + this.dish + this.getAll,
             Create: this.baseUrl + this.dish + this.create,
             Edit: this.baseUrl + this.dish + this.edit
+        };
+        this.User = {
+            Get: this.baseUrl + this.user + this.get,
+            GetAll: this.baseUrl + this.user + this.getAll,
+            Create: this.baseUrl + this.user + this.create,
+            Edit: this.baseUrl + this.user + this.edit
+        };
+        this.Role = {
+            GetAll: this.baseUrl + this.role + this.getAll
         };
     }
     return Apis;

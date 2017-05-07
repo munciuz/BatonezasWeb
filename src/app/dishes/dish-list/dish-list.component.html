@@ -7,26 +7,26 @@
         <button type="button" class="btn btn-default btn-sm" [routerLink]="['/dish', 0]">
           <span class="glyphicon glyphicon-plus"></span> Pridėti
         </button>
-        <div class='table-responsive'>
+        <div class='table-responsive btnz-grid'>
             <table class='table'>
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Created By User</th>
-                        <th>Created Date</th>
-                        <th>Is Valid</th>                        
+                        <th>Pavadinimas</th>
+                        <th>Patvirtintas</th>
+                        <th>Validus</th>  
+                        <th>Sukuręs vartotojas</th>
+                        <th>Sukūrimo data</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let dish of dishList'>
-                        <td>{{dish.id}}</td>
+                    <tr *ngFor='let dish of dishList' [routerLink]="['/dish', dish.id]" [class]="getTableRowClass(dish)">
                         <td>
-                            <a [routerLink]="['/dish', dish.id]">{{dish.name}}</a>
+                            <a>{{dish.name}}</a>
                         </td>
+                        <td><input disabled type="checkbox" [checked]="dish.isConfirmed" /></td>
+                        <td><input disabled type="checkbox" [checked]="dish.isValid" /></td>
                         <td>{{dish.createdByUser}}</td>
-                        <td>{{dish.createdDateTime | date:shortDate}}</td>
-                        <td>{{dish.isValid}}</td>
+                        <td>{{dish.createdDateTime | date: 'yyyy-MM-dd'}}</td>
                     </tr>
                 </tbody>
             </table>

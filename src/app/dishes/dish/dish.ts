@@ -6,4 +6,5 @@ export interface IDish {
     selectedTags: ITagListItem[];
     allTags: ITagListItem[];
     isValid: boolean;
+    isConfirmed: boolean;
 }

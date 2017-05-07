@@ -13,6 +13,7 @@ var app_routing_module_1 = require("./app-routing.module");
 var dish_type_module_1 = require("./dish-types/dish-type.module");
 var tag_module_1 = require("./tags/tag.module");
 var dish_module_1 = require("./dishes/dish.module");
+var user_module_1 = require("./users/user.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,6 +27,7 @@ AppModule = __decorate([
             dish_type_module_1.DishTypeModule,
             tag_module_1.TagModule,
             dish_module_1.DishModule,
+            user_module_1.UserModule,
             app_routing_module_1.AppRoutingModule
         ],
         declarations: [app_component_1.AppComponent],

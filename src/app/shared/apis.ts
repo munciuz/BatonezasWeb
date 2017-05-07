@@ -8,6 +8,8 @@ export class Apis {
     private dishType: string = 'dishType/';
     private tag: string = 'tag/';
     private dish: string = 'dish/';
+    private user: string = 'user/';
+    private role: string = 'role/';
 
     private get: string = 'get/';
     private getAll: string = 'getAll/';
@@ -34,5 +36,16 @@ export class Apis {
         GetAll: this.baseUrl + this.dish + this.getAll,
         Create: this.baseUrl + this.dish + this.create,
         Edit: this.baseUrl + this.dish + this.edit
+    };
+
+    public User = {
+        Get: this.baseUrl + this.user + this.get,
+        GetAll: this.baseUrl + this.user + this.getAll,
+        Create: this.baseUrl + this.user + this.create,
+        Edit: this.baseUrl + this.user + this.edit
+    };
+
+    public Role = {
+        GetAll: this.baseUrl + this.role + this.getAll
     };
 }

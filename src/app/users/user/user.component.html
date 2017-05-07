@@ -1,0 +1,47 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>Vartotojo vardas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                {{username}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>El. Paštas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                {{email}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>Rolė</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true">
+    {{role.name}}
+    <span class="caret"></span>
+  </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li *ngFor="let role of allRoles" (click)="setRole(role)">{{role.name}}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <input type="button" value="Išsaugoti" class="btn" (click)='onSave()'>
+        <input type="button" value="Atgal" class="btn" (click)='onBackClicked()'>
+    </div>
+</div>

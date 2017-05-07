@@ -15,7 +15,21 @@ div.panel-heading {
    font-size: x-large; 
 }
 
-/*Bootstrap button outline override*/
+.btnz-grid tbody tr:hover {
+    background-color: #e6e6e6 !important;
+    cursor: pointer;
+}
+
+.btnz-grid tbody tr .notConfirmed {
+    background-color: #f0ad4e;
+}
+
+.dropdown li:hover {
+    cursor: pointer;
+    background-color: #6DB18D;
+}
+
+/*Bootstrap  override*/
 .btn-success {
     margin: 2px;
     border-color: #6DB18D;
@@ -47,10 +61,24 @@ div.panel-heading {
     color: #d9534f;
 }
 
+.btn-default:hover {
+    background-color: #6DB18D;
+    border-color: #6DB18D;
+}
+
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
 .btn-info.btn-outline:hover,
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
     color: #fff;
+}
+
+.panel-primary {
+    border-color: #d9534f;
+}
+
+.panel-primary > .panel-heading{
+    background-color: #d9534f;
+    border-color: #d9534f;
 }
