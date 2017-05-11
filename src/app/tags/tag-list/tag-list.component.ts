@@ -10,7 +10,7 @@ import { TagService } from "../tag.service";
 })
 
 export class TagListComponent implements OnInit {
-    pageTitle: string = 'Tag\'ų sąrašas';
+    pageTitle: string = 'Žymės';
     
     errorMessage: string;
     showImage: boolean = true;

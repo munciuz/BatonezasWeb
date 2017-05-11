@@ -13,7 +13,7 @@ var tag_service_1 = require("../tag.service");
 var TagListComponent = (function () {
     function TagListComponent(tagService) {
         this.tagService = tagService;
-        this.pageTitle = 'Tag\'ų sąrašas';
+        this.pageTitle = 'Žymės';
         this.showImage = true;
     }
     TagListComponent.prototype.ngOnInit = function () {
