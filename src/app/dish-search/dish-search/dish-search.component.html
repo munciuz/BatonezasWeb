@@ -1,0 +1,22 @@
+<div class="row">
+    <div *ngFor="let dishReview of filteredDishReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
+        <div class="thumbnail">
+            <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">
+            <div class="caption">
+                <h4><a href="#">{{dishReview.dishName}}</a>
+                </h4>
+                <p><span class="glyphicon glyphicon-map-marker"></span>{{dishReview.placeName}}</p>
+            </div>
+            <div class="ratings">
+                <p class="pull-right">Apžvalgų: {{dishReview.reviewCount}}</p>
+                <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

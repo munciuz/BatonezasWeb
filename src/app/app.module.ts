@@ -9,6 +9,7 @@ import { DishTypeModule } from "./dish-types/dish-type.module";
 import { TagModule } from "./tags/tag.module";
 import { DishModule } from "./dishes/dish.module";
 import { UserModule } from "./users/user.module";
+import { DishSearchModule } from "./dish-search/dish-search.module";
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from "./users/user.module";
     TagModule,
     DishModule,
     UserModule,
+    DishSearchModule,
     AppRoutingModule    
   ],
   declarations: [AppComponent],

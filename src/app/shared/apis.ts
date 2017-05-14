@@ -3,16 +3,18 @@ import { Injectable } from "@angular/core";
 @Injectable()
 
 export class Apis {
-    private baseUrl: string = 'http://localhost/batonezasapi/';
-    // private baseUrl: string = 'http://munciuz-001-site1.etempurl.com/';
+    // private baseUrl: string = 'http://localhost/batonezasapi/';
+    private baseUrl: string = 'http://munciuz-001-site1.etempurl.com/';
     private dishType: string = 'dishType/';
     private tag: string = 'tag/';
     private dish: string = 'dish/';
     private user: string = 'user/';
     private role: string = 'role/';
+    private dishReview: string = 'dishReview/';
 
     private get: string = 'get/';
     private getAll: string = 'getAll/';
+    private getPageModel: string = 'getPageModel/';
     private create: string = 'Create/';
     private edit: string = 'edit/';
     private delete: string = 'delete/';
@@ -22,6 +24,14 @@ export class Apis {
         GetAll: this.baseUrl + this.dishType + this.getAll,
         Create: this.baseUrl + this.dishType + this.create,
         Edit: this.baseUrl + this.dishType + this.edit
+    };
+
+    public DishReview = {
+        Get: this.baseUrl + this.dishReview + this.get,
+        GetAll: this.baseUrl + this.dishReview + this.getAll,
+        GetPageModel: this.baseUrl + this.dishReview + this.getPageModel,
+        Create: this.baseUrl + this.dishReview + this.create,
+        Edit: this.baseUrl + this.dishReview + this.edit
     };
 
     public Tag = {
@@ -42,7 +52,10 @@ export class Apis {
         Get: this.baseUrl + this.user + this.get,
         GetAll: this.baseUrl + this.user + this.getAll,
         Create: this.baseUrl + this.user + this.create,
-        Edit: this.baseUrl + this.user + this.edit
+        Edit: this.baseUrl + this.user + this.edit,
+        Login: this.baseUrl + "oauth2/token",
+        UserProfile: this.baseUrl + this.user + "GetUserProfile",
+        EditProfile: this.baseUrl + this.user + "EditUserProfile"
     };
 
     public Role = {

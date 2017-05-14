@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div *ngFor="let dishReview of dishReviews" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="thumbnail">
+                <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">
+                <div class="caption">
+                    <h4><a href="#">Apžvelgė - {{dishReview.reviewedBy}}</a>
+                    </h4>
+                    <div class="ratings">
+                    <p>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                    </p>
+                </div>
+                    <p>{{dishReview.review}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        map and stuff
+    </div>
+</div>

@@ -20,6 +20,10 @@ div.panel-heading {
     cursor: pointer;
 }
 
+.dish-search-image {
+    max-height: 250px;
+}
+
 .btnz-grid tbody tr .notConfirmed {
     background-color: #f0ad4e;
 }
@@ -75,10 +79,24 @@ div.panel-heading {
 }
 
 .panel-primary {
-    border-color: #d9534f;
+    border-color: #6DB18D;
 }
 
 .panel-primary > .panel-heading{
+    background-color: #6DB18D;
+    border-color: #6DB18D;
+}
+
+.navbar-inverse {
     background-color: #d9534f;
     border-color: #d9534f;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #9d9d9d;
 }

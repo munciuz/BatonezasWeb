@@ -8,15 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var Apis = (function () {
     function Apis() {
-        this.baseUrl = 'http://localhost/batonezasapi/';
-        // private baseUrl: string = 'http://munciuz-001-site1.etempurl.com/';
+        // private baseUrl: string = 'http://localhost/batonezasapi/';
+        this.baseUrl = 'http://munciuz-001-site1.etempurl.com/';
         this.dishType = 'dishType/';
         this.tag = 'tag/';
         this.dish = 'dish/';
         this.user = 'user/';
         this.role = 'role/';
+        this.dishReview = 'dishReview/';
         this.get = 'get/';
         this.getAll = 'getAll/';
+        this.getPageModel = 'getPageModel/';
         this.create = 'Create/';
         this.edit = 'edit/';
         this.delete = 'delete/';
@@ -25,6 +27,13 @@ var Apis = (function () {
             GetAll: this.baseUrl + this.dishType + this.getAll,
             Create: this.baseUrl + this.dishType + this.create,
             Edit: this.baseUrl + this.dishType + this.edit
+        };
+        this.DishReview = {
+            Get: this.baseUrl + this.dishReview + this.get,
+            GetAll: this.baseUrl + this.dishReview + this.getAll,
+            GetPageModel: this.baseUrl + this.dishReview + this.getPageModel,
+            Create: this.baseUrl + this.dishReview + this.create,
+            Edit: this.baseUrl + this.dishReview + this.edit
         };
         this.Tag = {
             Get: this.baseUrl + this.tag + this.get,
@@ -42,7 +51,10 @@ var Apis = (function () {
             Get: this.baseUrl + this.user + this.get,
             GetAll: this.baseUrl + this.user + this.getAll,
             Create: this.baseUrl + this.user + this.create,
-            Edit: this.baseUrl + this.user + this.edit
+            Edit: this.baseUrl + this.user + this.edit,
+            Login: this.baseUrl + "oauth2/token",
+            UserProfile: this.baseUrl + this.user + "GetUserProfile",
+            EditProfile: this.baseUrl + this.user + "EditUserProfile"
         };
         this.Role = {
             GetAll: this.baseUrl + this.role + this.getAll
