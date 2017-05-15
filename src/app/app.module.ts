@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
 // import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
@@ -23,6 +24,7 @@ import { DishSearchModule } from "./dish-search/dish-search.module";
     UserModule,
     DishSearchModule,
     AppRoutingModule,
+    FormsModule
     // AgmCoreModule.forRoot({ apiKey: 'AIzaSyA_DFifZJTwo1I5sFtQWC4dGrb7Zdl7TaI' })
   ],
   declarations: [AppComponent],

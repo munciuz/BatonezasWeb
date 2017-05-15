@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
 // import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
@@ -32,6 +33,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             dish_search_module_1.DishSearchModule,
             app_routing_module_1.AppRoutingModule,
+            forms_1.FormsModule
         ],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]

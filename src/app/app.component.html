@@ -17,31 +17,44 @@
                     <a [routerLink]="['/dishSearch']">Patiekalai</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/tags']">Žymės</a>
+                    <a [routerLink]="['/tags']">| Žymės</a>
                 </li>
                 <li>
-                    <a [routerLink]="['/dishes']">Patiekalai Admin</a>
+                    <a [routerLink]="['/dishes']">Patiekalai</a>
                 </li>
                 <li>
                     <a [routerLink]="['/users']">Vartotojai</a>
                 </li>
             </ul>
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" [(ngModel)]='username' name='username' placeholder="Vartotojo vardas">
+                    <input type="password" [(ngModel)]='password' name='password' placeholder="Slaptažodis">
+                    <button type="button" class="btn btn-default btn-sm" (click)="login()">Prisijungti</button>
+                    <button type="button" class="btn btn-default btn-sm" (click)="register()">Registruotis</button>
+                </div>
+            </form>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
-
-<!--<h2>{{randomTitle}}</h2>
-<div class="row">
-    <ul class="nav navbar-nav">
-        <li><a [routerLink]="['/welcome']">Home</a></li>
-        <li><a [routerLink]="['/tags']">Tags</a></li>
-        <li><a [routerLink]="['/dishes']">Dishes</a></li>
-        <li><a [routerLink]="['/users']">Users</a></li>
-    </ul>
-</div>-->
 <div class="divider"></div>
 <div class="container">
     <router-outlet></router-outlet>
+</div>
+
+<div class="container">
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Patiekalų reitingavimo sistema. Mantas Dubickas IFF-3/2, 2017</p>
+            </div>
+        </div>
+    </footer>
+
 </div>
