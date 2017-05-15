@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+// import { LocalStorage } from "angular2-localstorage/WebStorage";
 var Observable_1 = require("rxjs/Observable");
 var apis_1 = require("./apis");
 // import { IUserProfile } from "../models/user/userProfile";
@@ -27,6 +28,7 @@ var AuthenticationService = (function () {
         this.token = '';
     };
     AuthenticationService.prototype.SetToken = function (token) {
+        // LocalStorage.
         this.token = token;
     };
     AuthenticationService.prototype.Login = function (userData) {

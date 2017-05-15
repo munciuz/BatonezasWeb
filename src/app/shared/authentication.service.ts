@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
+// import { LocalStorage } from "angular2-localstorage/WebStorage";
 
 import { Observable } from 'rxjs/Observable';
 
@@ -25,6 +26,7 @@ export class AuthenticationService {
     }
 
     SetToken(token: string) {
+        // LocalStorage.
         this.token = token;
     }
 

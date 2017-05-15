@@ -9,7 +9,6 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
-// import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var dish_type_module_1 = require("./dish-types/dish-type.module");

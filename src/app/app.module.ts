@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
-// import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
-
+import { WebStorageModule, LocalStorageService } from "angular2-localstorage";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from "./app-routing.module";

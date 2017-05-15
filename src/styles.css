@@ -41,6 +41,14 @@ div.panel-heading {
     margin-top: 75px;
 }
 
+.filter-element {
+    margin-right: 10px;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+}
+
 /*Bootstrap  override*/
 
 .btn-success {
