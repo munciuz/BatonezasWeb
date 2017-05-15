@@ -18,6 +18,9 @@ var DishReviewComponent = (function () {
         this.router = router;
         this.dishSearchService = dishSearchService;
         this.tagService = tagService;
+        this.title = 'My first angular2-google-maps project';
+        this.lat = 51.678418;
+        this.lng = 7.809007;
     }
     DishReviewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -28,6 +31,12 @@ var DishReviewComponent = (function () {
                 .subscribe(function (dishReviews) {
                 console.log(dishReviews);
                 _this.dishReviews = dishReviews;
+            });
+            _this.dishSearchService.getPlace(_this.placeId)
+                .subscribe(function (place) {
+                _this.lat = +place.lat;
+                _this.lng = +place.lng;
+                _this.title = place.name;
             });
         });
     };

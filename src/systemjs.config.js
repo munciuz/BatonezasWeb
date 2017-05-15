@@ -24,7 +24,13 @@
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
       // other libraries
-      'rxjs': 'npm:rxjs'
+      'rxjs': 'npm:rxjs',
+      // 'angular2-google-maps': 'node_modules/angular2-google-maps@0.17.0'
+      // "angular2-google-maps/core": {    
+      //   "defaultExtension": "js",
+      //   "main": "index.js"
+      // }
+      'angular2-google-maps': 'npm:angular2-google-maps'  
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -34,6 +40,10 @@
       },
       rxjs: {
         defaultExtension: 'js'
+      },
+      "angular2-google-maps/core": {    
+        "defaultExtension": "js",
+        "main": "index.js"
       }
     }
   });

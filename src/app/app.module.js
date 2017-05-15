@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var http_1 = require("@angular/http");
+// import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var dish_type_module_1 = require("./dish-types/dish-type.module");
@@ -30,7 +31,7 @@ AppModule = __decorate([
             dish_module_1.DishModule,
             user_module_1.UserModule,
             dish_search_module_1.DishSearchModule,
-            app_routing_module_1.AppRoutingModule
+            app_routing_module_1.AppRoutingModule,
         ],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]

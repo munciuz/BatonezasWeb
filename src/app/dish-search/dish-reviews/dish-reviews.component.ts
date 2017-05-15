@@ -20,6 +20,9 @@ import { DishSearchService } from "../dish-search.service";
 export class DishReviewComponent implements OnInit {
     dishId: number;
     placeId: number;
+    title: string = 'My first angular2-google-maps project';
+    lat: number = 51.678418;
+    lng: number = 7.809007;
 
     dishReviews: IDishReviewListItem[];
 
@@ -42,6 +45,13 @@ export class DishReviewComponent implements OnInit {
                     .subscribe(dishReviews => {
                         console.log(dishReviews);
                         this.dishReviews = dishReviews;
+                    });
+
+                this.dishSearchService.getPlace(this.placeId)
+                    .subscribe(place => {
+                        this.lat = +place.lat;
+                        this.lng = +place.lng;
+                        this.title = place.name;
                     });
             }
         )

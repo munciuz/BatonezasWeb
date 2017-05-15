@@ -7,6 +7,7 @@ import { DishSearchService } from "./dish-search.service";
 import { Apis } from "../shared/apis";
 import { HttpClient } from "../shared/httpClient";
 import { AuthenticationService } from "../shared/authentication.service";
+import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
 
 import { SharedModule } from "../shared/shared.module";
 
@@ -17,6 +18,7 @@ import { SharedModule } from "../shared/shared.module";
     ],
     imports: [
         SharedModule,
+        AgmCoreModule.forRoot({ apiKey: 'AIzaSyA_DFifZJTwo1I5sFtQWC4dGrb7Zdl7TaI' }),
         RouterModule.forChild([
             { path: 'dishSearch', component: DishSearchComponent },
              { path: 'dishReviews/:dishId/:placeId', component: DishReviewComponent }

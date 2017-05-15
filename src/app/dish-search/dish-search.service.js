@@ -31,6 +31,10 @@ var DishSearchService = (function () {
         return this.httpClient.get(this.apis.DishReview.Get + id)
             .map(function (response) { return response.json(); });
     };
+    DishSearchService.prototype.getPlace = function (id) {
+        return this.httpClient.get(this.apis.Place.Get + id)
+            .map(function (response) { return response.json(); });
+    };
     return DishSearchService;
 }());
 DishSearchService = __decorate([

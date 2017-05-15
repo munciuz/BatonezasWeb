@@ -1,5 +1,4 @@
-import { Component, OnChanges, Input,
-         Output, EventEmitter } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     moduleId: module.id,
@@ -8,19 +7,23 @@ import { Component, OnChanges, Input,
     styleUrls: ['./star.component.css']
 })
 
-export class StarComponent implements OnChanges{
-@Input() rating: number;
-    starWidth: number;
-    @Output() ratingClicked: EventEmitter<string> =
-        new EventEmitter<string>();
+export class StarComponent {
+    @Input() rating: number;
 
-    ngOnChanges(): void {
-        // Convert x out of 5 starts
-        // to y out of 86px width
-        this.starWidth = this.rating * 86 / 5;
-    }
+    starValues: number[] = [0, 1, 2, 3, 4];
 
-    onClick(): void {
-        this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+    getStarClassName(starValue: number): string {
+        let starName: string;
+
+        let residual = this.rating % 1;
+        let whole = Math.trunc(this.rating) - starValue;
+
+        if (whole > 0){
+            starName = 'glyphicon glyphicon-star';
+        } else {
+            starName = 'glyphicon glyphicon-star-empty';
+        }
+
+        return starName
     }
 }

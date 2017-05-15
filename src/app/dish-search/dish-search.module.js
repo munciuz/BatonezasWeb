@@ -13,6 +13,7 @@ var dish_search_service_1 = require("./dish-search.service");
 var apis_1 = require("../shared/apis");
 var httpClient_1 = require("../shared/httpClient");
 var authentication_service_1 = require("../shared/authentication.service");
+var core_module_1 = require("angular2-google-maps/core/core-module");
 var shared_module_1 = require("../shared/shared.module");
 var DishSearchModule = (function () {
     function DishSearchModule() {
@@ -27,6 +28,7 @@ DishSearchModule = __decorate([
         ],
         imports: [
             shared_module_1.SharedModule,
+            core_module_1.AgmCoreModule.forRoot({ apiKey: 'AIzaSyA_DFifZJTwo1I5sFtQWC4dGrb7Zdl7TaI' }),
             router_1.RouterModule.forChild([
                 { path: 'dishSearch', component: dish_search_component_1.DishSearchComponent },
                 { path: 'dishReviews/:dishId/:placeId', component: dish_reviews_component_1.DishReviewComponent }

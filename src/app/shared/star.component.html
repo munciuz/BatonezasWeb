@@ -1,12 +1,5 @@
-<div class="crop" 
-    [style.width.px]="starWidth"
-    [title]="rating"
-    (click)='onClick()'>
-    <div style="width: 86px">
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-    </div>
+<div class="crop" [title]="Reitingas">
+    <p>
+        <span *ngFor="let starValue of starValues" [class]="getStarClassName(starValue)"></span>
+    </p>
 </div>

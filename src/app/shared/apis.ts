@@ -8,6 +8,7 @@ export class Apis {
     private dishType: string = 'dishType/';
     private tag: string = 'tag/';
     private dish: string = 'dish/';
+    private place: string = 'place/';
     private user: string = 'user/';
     private role: string = 'role/';
     private dishReview: string = 'dishReview/';
@@ -46,6 +47,10 @@ export class Apis {
         GetAll: this.baseUrl + this.dish + this.getAll,
         Create: this.baseUrl + this.dish + this.create,
         Edit: this.baseUrl + this.dish + this.edit
+    };
+
+    public Place = {
+        Get: this.baseUrl + this.place + this.get
     };
 
     public User = {

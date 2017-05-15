@@ -9,13 +9,7 @@
             </div>
             <div class="ratings">
                 <p class="pull-right">Apžvalgų: {{dishReview.reviewCount}}</p>
-                <p>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                </p>
+                <comp-star [rating]="dishReview.ratingAverage"></comp-star>
             </div>
         </div>
     </div>

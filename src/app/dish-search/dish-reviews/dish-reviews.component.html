@@ -7,20 +7,17 @@
                     <h4><a href="#">Apžvelgė - {{dishReview.reviewedBy}}</a>
                     </h4>
                     <div class="ratings">
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div>
+                        
+                <comp-star [rating]="dishReview.rating"></comp-star>
+                    </div>
                     <p>{{dishReview.review}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-        map and stuff
+        <sebm-google-map [latitude]="lat" [longitude]="lng">
+            <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+        </sebm-google-map>
     </div>
 </div>

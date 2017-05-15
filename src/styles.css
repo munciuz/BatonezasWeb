@@ -33,7 +33,16 @@ div.panel-heading {
     background-color: #6DB18D;
 }
 
+.sebm-google-map-container {
+  height: 200px;
+}
+
+.divider {
+    margin-top: 75px;
+}
+
 /*Bootstrap  override*/
+
 .btn-success {
     margin: 2px;
     border-color: #6DB18D;
