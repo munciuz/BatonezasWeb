@@ -26,12 +26,22 @@
                     <a [routerLink]="['/users']">Vartotojai</a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <form *ngIf="!logedIn" class="navbar-form navbar-right">
                 <div class="form-group">
                     <input type="text" [(ngModel)]='username' name='username' placeholder="Vartotojo vardas">
                     <input type="password" [(ngModel)]='password' name='password' placeholder="Slaptažodis">
                     <button type="button" class="btn btn-default btn-sm" (click)="login()">Prisijungti</button>
                     <button type="button" class="btn btn-default btn-sm" (click)="register()">Registruotis</button>
+                </div>
+            </form>
+            <form *ngIf="logedIn" class="navbar-form navbar-right">
+                <div class="form-group">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">Sveiki, {{username}}</a>
+                        </li>
+                    </ul>
+<button type="button" class="btn btn-default btn-sm" (click)="logout()">Atsijungti</button>
                 </div>
             </form>
         </div>

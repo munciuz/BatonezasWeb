@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
+// import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+
 import { TagService } from "../../tags/tag.service";
 import { ITagListItem } from "../../tags/tag-list/tag-list-item";
 
@@ -26,6 +28,9 @@ export class DishSearchComponent implements OnInit {
     vegetarianFilter: boolean = false;
     ratingFilter: number = null;
 
+    optionsModel: number[];
+    // myOptions: IMultiSelectOption[];
+
     dishReviewList: IGroupedDishReviewListItem[];
     filteredDishReviewList: IGroupedDishReviewListItem[];
     tagList: ITagListItem[];
@@ -41,6 +46,11 @@ export class DishSearchComponent implements OnInit {
 
     ngOnInit() {
 
+        // this.myOptions = [
+        //     { id: 1, name: 'Option 1' },
+        //     { id: 2, name: 'Option 2' },
+        // ];
+
         this.dishSearchService.getDishSearchPageModel()
             .subscribe(pageModel => {
                 this.dishReviewList = pageModel.dishReviewList;
@@ -51,4 +61,9 @@ export class DishSearchComponent implements OnInit {
                 console.log('got grouped dish reviews: ', pageModel);
             });
     }
+
+    onChange() {
+        console.log(this.optionsModel);
+    }
+
 }

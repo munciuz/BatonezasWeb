@@ -15,10 +15,12 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 var apis_1 = require("../shared/apis");
+var httpClient_1 = require("../shared/httpClient");
 var UserService = (function () {
-    function UserService(http, apis) {
+    function UserService(http, apis, httpClient) {
         this.http = http;
         this.apis = apis;
+        this.httpClient = httpClient;
     }
     UserService.prototype.getUserList = function () {
         return this.http.get(this.apis.User.GetAll)
@@ -44,6 +46,10 @@ var UserService = (function () {
             .map(function (res) { return res.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
     };
+    UserService.prototype.getProfileData = function () {
+        return this.httpClient.get(this.apis.User.UserProfile)
+            .map(function (response) { return response.json(); });
+    };
     UserService.prototype.handleError = function (error) {
         return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
@@ -51,7 +57,7 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, apis_1.Apis])
+    __metadata("design:paramtypes", [http_1.Http, apis_1.Apis, httpClient_1.HttpClient])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

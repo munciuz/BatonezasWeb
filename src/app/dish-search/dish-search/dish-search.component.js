@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+// import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 var tag_service_1 = require("../../tags/tag.service");
 var dish_search_service_1 = require("../dish-search.service");
 // import * as _ from 'lodash';
@@ -27,6 +28,10 @@ var DishSearchComponent = (function () {
         this.ratingFilter = null;
     }
     DishSearchComponent.prototype.ngOnInit = function () {
+        // this.myOptions = [
+        //     { id: 1, name: 'Option 1' },
+        //     { id: 2, name: 'Option 2' },
+        // ];
         var _this = this;
         this.dishSearchService.getDishSearchPageModel()
             .subscribe(function (pageModel) {
@@ -36,6 +41,9 @@ var DishSearchComponent = (function () {
             _this.dishList = pageModel.dishList;
             console.log('got grouped dish reviews: ', pageModel);
         });
+    };
+    DishSearchComponent.prototype.onChange = function () {
+        console.log(this.optionsModel);
     };
     return DishSearchComponent;
 }());

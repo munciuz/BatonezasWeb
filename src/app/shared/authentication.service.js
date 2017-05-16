@@ -21,15 +21,28 @@ var AuthenticationService = (function () {
         this.token = '';
         this.username = '';
     }
-    AuthenticationService.prototype.GetToken = function () {
-        return this.token;
-    };
-    AuthenticationService.prototype.ResetToken = function () {
-        this.token = '';
+    AuthenticationService.prototype.Reset = function () {
+        this.RemoveLocalStorage('token');
+        this.RemoveLocalStorage('username');
+        this.RemoveLocalStorage('roleId');
     };
     AuthenticationService.prototype.SetToken = function (token) {
-        // LocalStorage.
-        this.token = token;
+        this.SetLocalStorage('token', token);
+    };
+    AuthenticationService.prototype.SetUsername = function (username) {
+        this.SetLocalStorage('username', username);
+    };
+    AuthenticationService.prototype.SetRole = function (roleId) {
+        this.SetLocalStorage('roleId', roleId);
+    };
+    AuthenticationService.prototype.GetToken = function () {
+        return this.GetLocalStorage('token');
+    };
+    AuthenticationService.prototype.GetUsername = function () {
+        return this.GetLocalStorage('username');
+    };
+    AuthenticationService.prototype.GetRole = function () {
+        return this.GetLocalStorage('roleId');
     };
     AuthenticationService.prototype.Login = function (userData) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
@@ -44,6 +57,15 @@ var AuthenticationService = (function () {
         // return this.http.post(this.apis.User.Login, user, headers)
         //     .map((res: Response) => res.json())
         //     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    };
+    AuthenticationService.prototype.SetLocalStorage = function (key, value) {
+        window.localStorage.setItem(key, value);
+    };
+    AuthenticationService.prototype.GetLocalStorage = function (key) {
+        return window.localStorage.getItem(key);
+    };
+    AuthenticationService.prototype.RemoveLocalStorage = function (key) {
+        window.localStorage.removeItem(key);
     };
     return AuthenticationService;
 }());

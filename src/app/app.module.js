@@ -32,7 +32,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             dish_search_module_1.DishSearchModule,
             app_routing_module_1.AppRoutingModule,
-            forms_1.FormsModule
+            forms_1.FormsModule,
         ],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]

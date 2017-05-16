@@ -7,14 +7,16 @@ import 'rxjs/add/operator/do';
 
 import { IUserListItem } from "./user-list/user-list-item";
 import { IUser } from "./user/user";
+import { IUserProfile } from "../shared/models/user-profile";
 
 import { Apis } from "../shared/apis";
+import { HttpClient } from "../shared/httpClient";
 
 @Injectable()
 
 export class UserService {
 
-    constructor(private http: Http, private apis: Apis) { }
+    constructor(private http: Http, private apis: Apis, private httpClient: HttpClient) { }
 
     getUserList(): Observable<IUserListItem[]> {
         return this.http.get(this.apis.User.GetAll)
@@ -44,6 +46,11 @@ export class UserService {
         return this.http.post(this.apis.User.Edit, dish, headers) 
             .map((res: Response) => res.json()) 
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
+    }
+
+    getProfileData(): Observable<IUserProfile> {
+        return this.httpClient.get(this.apis.User.UserProfile)
+            .map((response: Response) => <IUserProfile>response.json());
     }
 
     private handleError(error: Response) {

@@ -17,17 +17,34 @@ export class AuthenticationService {
 
     constructor(private http: Http, private apis: Apis) { }
 
-    GetToken(){
-        return this.token;
-    }
-
-    ResetToken(){
-        this.token = '';
+    Reset() {
+        this.RemoveLocalStorage('token');
+        this.RemoveLocalStorage('username');
+        this.RemoveLocalStorage('roleId');
     }
 
     SetToken(token: string) {
-        // LocalStorage.
-        this.token = token;
+        this.SetLocalStorage('token', token);
+    }
+
+    SetUsername(username: string) {
+        this.SetLocalStorage('username', username);
+    }
+
+    SetRole(roleId: number) {
+        this.SetLocalStorage('roleId', roleId);
+    }
+
+    GetToken() {
+        return this.GetLocalStorage('token');
+    }
+
+    GetUsername() {
+        return this.GetLocalStorage('username');
+    }
+
+    GetRole() {
+        return this.GetLocalStorage('roleId');
     }
 
     Login(userData: any): Observable<any> {
@@ -35,16 +52,28 @@ export class AuthenticationService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.apis.User.Login, 
+        return this.http.post(this.apis.User.Login,
             "userName=" + encodeURIComponent(userData.username) +
             "&password=" + encodeURIComponent(userData.password) +
             "&grant_type=password", headers)
-            .map((res: Response) => 
+            .map((res: Response) =>
                 res.json())
             .catch((error: any) => Observable.throw(error));
 
         // return this.http.post(this.apis.User.Login, user, headers)
         //     .map((res: Response) => res.json())
         //     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    private SetLocalStorage(key: string, value: any) {
+        window.localStorage.setItem(key, value);
+    }
+
+    private GetLocalStorage(key: string) {
+        return window.localStorage.getItem(key);
+    }
+
+    private RemoveLocalStorage(key: string) {
+        window.localStorage.removeItem(key);
     }
 }   

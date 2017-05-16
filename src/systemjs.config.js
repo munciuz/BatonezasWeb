@@ -30,7 +30,10 @@
       //   "defaultExtension": "js",
       //   "main": "index.js"
       // }
-      'angular2-google-maps': 'npm:angular2-google-maps'  
+      'angular2-google-maps': 'npm:angular2-google-maps',
+      'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
+      // 'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
+      // 'ng2-dropdown-multiselect': 'npm:ng2-dropdown-multiselect'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -44,7 +47,15 @@
       "angular2-google-maps/core": {    
         "defaultExtension": "js",
         "main": "index.js"
-      }
+      },
+      'angular-2-dropdown-multiselect': {
+        "defaultExtension": 'js',
+        "main": 'index.js'
+      },
+      // 'ng2-dropdown-multiselect': {
+      //   "main": 'dis/index.js',
+      //   "defaultExtension": 'js'
+      // }
     }
   });
 })(this);
