@@ -12,6 +12,7 @@ export class Apis {
     private user: string = 'user/';
     private role: string = 'role/';
     private dishReview: string = 'dishReview/';
+    private placeReview: string = 'placeReview/';
 
     private get: string = 'get/';
     private getAll: string = 'getAll/';
@@ -33,6 +34,15 @@ export class Apis {
         GetPageModel: this.baseUrl + this.dishReview + this.getPageModel,
         Create: this.baseUrl + this.dishReview + this.create,
         Edit: this.baseUrl + this.dishReview + this.edit
+    };
+
+    public PlaceReview = {
+        Get: this.baseUrl + this.placeReview + this.get,
+        GetAll: this.baseUrl + this.placeReview + this.getAll,
+        GetPageModel: this.baseUrl + this.placeReview + this.getPageModel,
+        Create: this.baseUrl + this.placeReview + this.create,
+        Edit: this.baseUrl + this.placeReview + this.edit,
+        GetReviews: this.baseUrl + this.placeReview + 'getReviews/'
     };
 
     public Tag = {

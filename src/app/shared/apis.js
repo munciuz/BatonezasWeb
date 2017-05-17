@@ -17,6 +17,7 @@ var Apis = (function () {
         this.user = 'user/';
         this.role = 'role/';
         this.dishReview = 'dishReview/';
+        this.placeReview = 'placeReview/';
         this.get = 'get/';
         this.getAll = 'getAll/';
         this.getPageModel = 'getPageModel/';
@@ -35,6 +36,14 @@ var Apis = (function () {
             GetPageModel: this.baseUrl + this.dishReview + this.getPageModel,
             Create: this.baseUrl + this.dishReview + this.create,
             Edit: this.baseUrl + this.dishReview + this.edit
+        };
+        this.PlaceReview = {
+            Get: this.baseUrl + this.placeReview + this.get,
+            GetAll: this.baseUrl + this.placeReview + this.getAll,
+            GetPageModel: this.baseUrl + this.placeReview + this.getPageModel,
+            Create: this.baseUrl + this.placeReview + this.create,
+            Edit: this.baseUrl + this.placeReview + this.edit,
+            GetReviews: this.baseUrl + this.placeReview + 'getReviews/'
         };
         this.Tag = {
             Get: this.baseUrl + this.tag + this.get,

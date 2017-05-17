@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <a class="navbar-brand" [routerLink]="['/welcome']">Start Bootstrap</a>
+            <a class="navbar-brand" [routerLink]="['/welcome']">PRS</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -17,12 +17,15 @@
                     <a [routerLink]="['/dishSearch']">Patiekalai</a>
                 </li>
                 <li>
+                    <a [routerLink]="['/placeSearch']">Restoranai</a>
+                </li>
+                <li *ngIf="isAdmin()">
                     <a [routerLink]="['/tags']">| Žymės</a>
                 </li>
-                <li>
+                <li *ngIf="isAdmin()">
                     <a [routerLink]="['/dishes']">Patiekalai</a>
                 </li>
-                <li>
+                <li *ngIf="isAdmin()">
                     <a [routerLink]="['/users']">Vartotojai</a>
                 </li>
             </ul>
@@ -40,8 +43,9 @@
                         <li>
                             <a href="#">Sveiki, {{username}}</a>
                         </li>
+                        <li><button type="button" class="btn btn-default btn-sm" (click)="logout()">Atsijungti</button></li>
                     </ul>
-<button type="button" class="btn btn-default btn-sm" (click)="logout()">Atsijungti</button>
+                    
                 </div>
             </form>
         </div>

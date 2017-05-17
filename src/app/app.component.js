@@ -24,9 +24,13 @@ var AppComponent = (function () {
         this.userService.getProfileData().subscribe(function (result) {
             _this.username = result.username;
             _this.logedIn = true;
+            _this.roleId = result.roleId;
         }, function (error) {
             console.log(error);
         });
+    };
+    AppComponent.prototype.isAdmin = function () {
+        return this.roleId == 1;
     };
     AppComponent.prototype.login = function () {
         var _this = this;

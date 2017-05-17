@@ -11,6 +11,7 @@ import { TagModule } from "./tags/tag.module";
 import { DishModule } from "./dishes/dish.module";
 import { UserModule } from "./users/user.module";
 import { DishSearchModule } from "./dish-search/dish-search.module";
+import { PlaceSearchModule } from "./place-search/place-search.module";
 
 import { MultiselectDropdownModule } from "angular-2-dropdown-multiselect";
 
@@ -23,6 +24,7 @@ import { MultiselectDropdownModule } from "angular-2-dropdown-multiselect";
     DishModule,
     UserModule,
     DishSearchModule,
+    PlaceSearchModule,
     AppRoutingModule,
     FormsModule,
     // MultiselectDropdownModule

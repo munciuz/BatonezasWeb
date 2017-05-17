@@ -1,0 +1,54 @@
+<nav class="row">
+    <ul class="filter-container nav navbar-nav">
+
+        <li class="filter-element"><input type="text" placeholder="Vieta"></li>
+        <li class="filter-element">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+    Tipas
+    <span class="caret"></span>
+  </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>Restoranas</li>
+                    <li>Kavin4</li>
+                    <li>Baras</li>
+                    <li>Kepyklėlė</li>
+                    <li>Naktinis Klubas</li>
+                </ul>
+            </div>
+        </li>
+        <li class="filter-element">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+    Reitingas
+    <span class="caret"></span>
+  </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div class="row">
+    <div *ngFor="let placeReview of placeReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/placeReviews', placeReview.placeId]">
+        <div class="thumbnail">
+            <img class="dish-search-image" src="{{placeReview.imageUri}}" alt="">
+            <div class="caption">
+                <h4><a href="#">{{placeReview.placeName}}</a>
+                </h4>
+            </div>
+            <div class="ratings">
+                <p class="pull-right">Apžvalgų: {{placeReview.reviewCount}}</p>
+                <comp-star [rating]="placeReview.ratingAverage"></comp-star>
+            </div>
+        </div>
+    </div>
+</div>

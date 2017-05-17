@@ -16,6 +16,7 @@ var tag_module_1 = require("./tags/tag.module");
 var dish_module_1 = require("./dishes/dish.module");
 var user_module_1 = require("./users/user.module");
 var dish_search_module_1 = require("./dish-search/dish-search.module");
+var place_search_module_1 = require("./place-search/place-search.module");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,6 +32,7 @@ AppModule = __decorate([
             dish_module_1.DishModule,
             user_module_1.UserModule,
             dish_search_module_1.DishSearchModule,
+            place_search_module_1.PlaceSearchModule,
             app_routing_module_1.AppRoutingModule,
             forms_1.FormsModule,
         ],

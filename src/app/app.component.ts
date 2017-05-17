@@ -14,6 +14,7 @@ export class AppComponent {
 
     username: string;
     password: string;
+    roleId: number;
     error: string;
     logedIn: boolean = false;
 
@@ -25,10 +26,15 @@ export class AppComponent {
         this.userService.getProfileData().subscribe(result => {
             this.username = result.username;
             this.logedIn = true;
+            this.roleId = result.roleId;
         },
             error => {
                 console.log(error);
             });
+    }
+
+    isAdmin(){
+        return this.roleId == 1;
     }
 
     login() {
