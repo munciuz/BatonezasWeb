@@ -12,7 +12,7 @@ import { Subscription } from "rxjs/Subscription";
 
 export class TagComponent implements OnInit {
     tagId: number
-    pageTitle: string = 'Edit';
+    pageTitle: string = 'Žymės administravimas';
     tag: ITag;
     errorMessage: string;
     name: string = '';

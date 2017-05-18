@@ -11,8 +11,16 @@ li {
     font-size: large;
 }
 
+.panel-body .row {
+    margin-bottom: 5px;
+}
+
 div.panel-heading {
    font-size: x-large; 
+}
+
+img.dish-search-image {
+    max-height: 140px;
 }
 
 .btnz-grid tbody tr:hover {

@@ -13,7 +13,7 @@ var dish_service_1 = require("../dish.service");
 var DishListComponent = (function () {
     function DishListComponent(dishService) {
         this.dishService = dishService;
-        this.pageTitle = 'patiekalų\'ų sąrašas';
+        this.pageTitle = 'Patiekalai';
         this.showImage = true;
     }
     DishListComponent.prototype.ngOnInit = function () {

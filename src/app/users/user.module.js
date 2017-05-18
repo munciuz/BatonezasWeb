@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var user_list_component_1 = require("./user-list/user-list.component");
 var user_component_1 = require("./user/user.component");
+var registration_component_1 = require("./registration/registration.component");
 var user_service_1 = require("./user.service");
 var role_service_1 = require("./role.service");
 var apis_1 = require("../shared/apis");
@@ -22,13 +23,15 @@ UserModule = __decorate([
     core_1.NgModule({
         declarations: [
             user_list_component_1.UserListComponent,
-            user_component_1.UserComponent
+            user_component_1.UserComponent,
+            registration_component_1.RegistrationComponent
         ],
         imports: [
             shared_module_1.SharedModule,
             router_1.RouterModule.forChild([
                 { path: 'users', component: user_list_component_1.UserListComponent },
-                { path: 'user/:id', component: user_component_1.UserComponent }
+                { path: 'user/:id', component: user_component_1.UserComponent },
+                { path: 'registration', component: registration_component_1.RegistrationComponent }
             ])
         ],
         providers: [user_service_1.UserService, role_service_1.RoleService, apis_1.Apis]

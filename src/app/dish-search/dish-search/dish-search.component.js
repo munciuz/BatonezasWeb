@@ -27,6 +27,12 @@ var DishSearchComponent = (function () {
         this.vegetarianFilter = false;
         this.ratingFilter = null;
     }
+    DishSearchComponent.prototype.newRow = function (index) {
+        console.log(index);
+        if (index % 4 === 0 || index === 0)
+            return "row";
+        return "";
+    };
     DishSearchComponent.prototype.ngOnInit = function () {
         // this.myOptions = [
         //     { id: 1, name: 'Option 1' },

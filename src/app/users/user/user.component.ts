@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
     email: string = '';
     role: IRole = { id: 0, name: '' };
     allRoles: IRole[] = [];
-    pageTitle: string = 'Edit';
+    pageTitle: string = 'Vartotojo administravimas';
 
     errorMessage: string;
     result: any;

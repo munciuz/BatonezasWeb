@@ -18,6 +18,7 @@ var AppComponent = (function () {
         this.userService = userService;
         this.randomTitle = "Batonezas";
         this.logedIn = false;
+        this.errors = '';
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -34,12 +35,13 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.login = function () {
         var _this = this;
+        this.errors = '';
         this.authenticationService.Login({ username: this.username, password: this.password }).subscribe(function (result) {
             _this.password = '';
             _this.authenticationService.SetToken(result.access_token);
             window.location.reload();
         }, function (error) {
-            _this.error = 'Blogi prisijungimo duomenys';
+            _this.errors = 'Blogi prisijungimo duomenys';
             _this.password = '';
             console.log(_this.error);
         });
@@ -50,6 +52,9 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.register = function () {
         console.log(this.authenticationService.GetToken());
+    };
+    AppComponent.prototype.hasErrors = function () {
+        return this.errors.length > 0;
     };
     return AppComponent;
 }());

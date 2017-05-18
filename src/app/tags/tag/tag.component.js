@@ -16,7 +16,7 @@ var TagComponent = (function () {
         this.route = route;
         this.router = router;
         this.service = service;
-        this.pageTitle = 'Edit';
+        this.pageTitle = 'Žymės administravimas';
         this.name = '';
         this.isValid = false;
     }

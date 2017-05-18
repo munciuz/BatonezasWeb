@@ -19,7 +19,7 @@ export class DishComponent implements OnInit {
     name: string = '';
     selectedTags: ITagListItem[] = [];
     allTags: ITagListItem[] = [];
-    pageTitle: string = 'Edit';
+    pageTitle: string = 'Patiekalo administravimas';
     dish: IDish;
     errorMessage: string;
     isValid: boolean = false;

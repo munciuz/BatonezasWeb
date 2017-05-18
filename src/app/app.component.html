@@ -34,15 +34,13 @@
                     <input type="text" [(ngModel)]='username' name='username' placeholder="Vartotojo vardas">
                     <input type="password" [(ngModel)]='password' name='password' placeholder="Slaptažodis">
                     <button type="button" class="btn btn-default btn-sm" (click)="login()">Prisijungti</button>
-                    <button type="button" class="btn btn-default btn-sm" (click)="register()">Registruotis</button>
+                    <button type="button" class="btn btn-default btn-sm" [routerLink]="['/registration']">Registruotis</button>
                 </div>
             </form>
             <form *ngIf="logedIn" class="navbar-form navbar-right">
                 <div class="form-group">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">Sveiki, {{username}}</a>
-                        </li>
+                        <li style="margin-right: 15px; color: white">Sveiki, {{username}}</li>
                         <li><button type="button" class="btn btn-default btn-sm" (click)="logout()">Atsijungti</button></li>
                     </ul>
                     
@@ -55,6 +53,9 @@
 </nav>
 <div class="divider"></div>
 <div class="container">
+    <div *ngIf="hasErrors()" class="alert alert-danger">
+            <strong>Klaida!</strong> {{errors}}
+        </div>
     <router-outlet></router-outlet>
 </div>
 

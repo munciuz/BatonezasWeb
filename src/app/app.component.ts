@@ -17,6 +17,7 @@ export class AppComponent {
     roleId: number;
     error: string;
     logedIn: boolean = false;
+    errors: string = '';
 
     constructor(private authenticationService: AuthenticationService, private userService: UserService) {
 
@@ -38,6 +39,8 @@ export class AppComponent {
     }
 
     login() {
+        this.errors = '';
+
         this.authenticationService.Login({ username: this.username, password: this.password }).subscribe(result => {
             this.password = '';
             this.authenticationService.SetToken(result.access_token);
@@ -45,7 +48,7 @@ export class AppComponent {
             window.location.reload();
         },
             error => {
-                this.error = 'Blogi prisijungimo duomenys';
+                this.errors = 'Blogi prisijungimo duomenys';
                 this.password = '';
                 console.log(this.error);
             });
@@ -59,5 +62,9 @@ export class AppComponent {
 
     register() {
         console.log(this.authenticationService.GetToken());
+    }
+
+    hasErrors(){
+        return this.errors.length > 0;
     }
 }

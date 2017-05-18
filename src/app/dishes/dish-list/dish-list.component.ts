@@ -10,7 +10,7 @@ import { DishService } from "../dish.service";
 })
 
 export class DishListComponent implements OnInit {
-    pageTitle: string = 'patiekalų\'ų sąrašas';
+    pageTitle: string = 'Patiekalai';
     
     errorMessage: string;
     showImage: boolean = true;

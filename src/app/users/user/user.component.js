@@ -25,7 +25,7 @@ var UserComponent = (function () {
         this.email = '';
         this.role = { id: 0, name: '' };
         this.allRoles = [];
-        this.pageTitle = 'Edit';
+        this.pageTitle = 'Vartotojo administravimas';
     }
     UserComponent.prototype.ngOnInit = function () {
         var _this = this;

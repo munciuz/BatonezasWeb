@@ -24,6 +24,8 @@ export class DishReviewComponent implements OnInit {
     lat: number = 51.678418;
     lng: number = 7.809007;
 
+    dishName: string = '';
+
     dishReviews: IDishReviewListItem[];
 
     private sub: Subscription
@@ -45,6 +47,7 @@ export class DishReviewComponent implements OnInit {
                     .subscribe(dishReviews => {
                         console.log(dishReviews);
                         this.dishReviews = dishReviews;
+                        this.dishName = dishReviews[0].name;
                     });
 
                 this.dishSearchService.getPlace(this.placeId)

@@ -5,30 +5,44 @@
         <li class="filter-element">
             <!--<ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>-->
             <!--<input type="text" placeholder="Žymės">-->
-            </li>
-        <li class="filter-element">Vegetariškas <input type="checkbox"></li>
-        <li class="filter-element"> 
+        </li>
+        <li class="filter-element">
             <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="true">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+    Žymės
+    <span class="caret"></span>
+  </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>Vištiena</li>
+                    <li>Kiauliena</li>
+                </ul>
+            </div>
+        </li>
+        <li class="filter-element">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
     Reitingas
     <span class="caret"></span>
   </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
         </li>
+        <li class="filter-element">Vegetariškas <input type="checkbox"></li>
     </ul>
 </nav>
 
 <div class="row">
-    <div *ngFor="let dishReview of filteredDishReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
-        <div class="thumbnail">
+    <div *ngFor="let dishReview of filteredDishReviewList; let i = index" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
+
+        <div style="min-height: 290px;" class="thumbnail">
             <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">
             <div class="caption">
                 <h4><a href="#">{{dishReview.dishName}}</a>

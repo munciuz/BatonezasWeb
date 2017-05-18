@@ -1,0 +1,45 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Registracija
+    </div>
+    <div class="panel-body">
+        <div *ngIf="hasErrors()" class="alert alert-danger">
+            <strong>Klaida!</strong> {{errors}}
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>Vartotojo vardas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="text" [(ngModel)]="username">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>El. Paštas</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="text" [(ngModel)]="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>Slaptažodis</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="password" [(ngModel)]="password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3">
+                <label>Pakartokite slaptažodį</label>
+            </div>
+            <div class="col-md-3 col-xs-9">
+                <input type="password" [(ngModel)]="password2">
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <input type="button" value="Registruotis" class="btn btn-default" (click)='register()'>
+        </div>
+    </div>

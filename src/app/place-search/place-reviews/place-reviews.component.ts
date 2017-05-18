@@ -39,42 +39,22 @@ export class PlaceReviewComponent implements OnInit {
 
     ngOnInit() {
 
-         this.sub = this.route.params.subscribe(
+        this.sub = this.route.params.subscribe(
             params => {
                 this.placeId = params['id'];
 
                 this.placeSearchService.getPlaceReviews(this.placeId)
                     .subscribe(placeReviews => {
-                        console.log('got reviews',placeReviews);
+                        console.log('got reviews', placeReviews);
                         this.placeReviews = placeReviews;
                     });
 
-                    this.dishSearchService.getPlace(this.placeId)
+                this.dishSearchService.getPlace(this.placeId)
                     .subscribe(place => {
                         this.lat = +place.lat;
                         this.lng = +place.lng;
                         this.title = place.name;
                     });
-            }
-
-        // this.sub = this.route.params.subscribe(
-        //     params => {
-        //         this.dishId = params['dishId'];
-        //         this.placeId = params['placeId'];
-
-        //         this.place.getDishReviews(this.dishId, this.placeId)
-        //             .subscribe(placeReviews => {
-        //                 console.log(placeReviews);
-        //                 this.dishReviews = placeReviews;
-        //             });
-
-        //         this.place.getPlace(this.placeId)
-        //             .subscribe(place => {
-        //                 this.lat = +place.lat;
-        //                 this.lng = +place.lng;
-        //                 this.title = place.name;
-        //             });
-            // }
-        // )
+            })
     }
 }

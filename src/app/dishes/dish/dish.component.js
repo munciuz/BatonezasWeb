@@ -22,7 +22,7 @@ var DishComponent = (function () {
         this.name = '';
         this.selectedTags = [];
         this.allTags = [];
-        this.pageTitle = 'Edit';
+        this.pageTitle = 'Patiekalo administravimas';
         this.isValid = false;
         this.isConfirmed = false;
     }

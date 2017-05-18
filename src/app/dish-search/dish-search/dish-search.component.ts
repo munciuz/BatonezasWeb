@@ -44,6 +44,15 @@ export class DishSearchComponent implements OnInit {
         private dishSearchService: DishSearchService,
         private tagService: TagService) { }
 
+        newRow(index: number){
+            console.log(index);
+
+            if (index % 4 === 0 || index === 0)
+                return "row";
+
+            return "";
+        }
+
     ngOnInit() {
 
         // this.myOptions = [

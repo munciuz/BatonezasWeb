@@ -21,6 +21,7 @@ var DishReviewComponent = (function () {
         this.title = 'My first angular2-google-maps project';
         this.lat = 51.678418;
         this.lng = 7.809007;
+        this.dishName = '';
     }
     DishReviewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -31,6 +32,7 @@ var DishReviewComponent = (function () {
                 .subscribe(function (dishReviews) {
                 console.log(dishReviews);
                 _this.dishReviews = dishReviews;
+                _this.dishName = dishReviews[0].name;
             });
             _this.dishSearchService.getPlace(_this.placeId)
                 .subscribe(function (place) {
