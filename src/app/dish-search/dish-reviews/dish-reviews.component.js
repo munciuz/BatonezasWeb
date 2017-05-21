@@ -12,15 +12,18 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var tag_service_1 = require("../../tags/tag.service");
 var dish_search_service_1 = require("../dish-search.service");
+var core_2 = require("angular2-google-maps/core");
 var DishReviewComponent = (function () {
-    function DishReviewComponent(route, router, dishSearchService, tagService) {
+    function DishReviewComponent(route, router, dishSearchService, tagService, _mapsAPILoader) {
         this.route = route;
         this.router = router;
         this.dishSearchService = dishSearchService;
         this.tagService = tagService;
+        this._mapsAPILoader = _mapsAPILoader;
         this.title = 'My first angular2-google-maps project';
         this.lat = 51.678418;
         this.lng = 7.809007;
+        this.gdetails = {};
         this.dishName = '';
     }
     DishReviewComponent.prototype.ngOnInit = function () {
@@ -30,7 +33,6 @@ var DishReviewComponent = (function () {
             _this.placeId = params['placeId'];
             _this.dishSearchService.getDishReviews(_this.dishId, _this.placeId)
                 .subscribe(function (dishReviews) {
-                console.log(dishReviews);
                 _this.dishReviews = dishReviews;
                 _this.dishName = dishReviews[0].name;
             });
@@ -39,8 +41,39 @@ var DishReviewComponent = (function () {
                 _this.lat = +place.lat;
                 _this.lng = +place.lng;
                 _this.title = place.name;
+                console.log(place.gId);
+                _this.getGooglePlaceDetails(place.gId);
             });
         });
+    };
+    DishReviewComponent.prototype.getGooglePlaceDetails = function (gid) {
+        var _this = this;
+        this._mapsAPILoader.load().then(function () {
+            console.log(google);
+            var map = new google.maps.Map(document.createElement('div'));
+            var placesService = new google.maps.places.PlacesService(map);
+            /* Get place details */
+            placesService.getDetails({
+                placeId: gid
+            }, function (placeResult, status) {
+                if (status === 'OK') {
+                    _this.gdetails = placeResult;
+                    console.log('got result ', placeResult);
+                }
+                else {
+                    console.log('got some errors: ', status);
+                }
+            });
+            // Place your code in here...
+        });
+    };
+    DishReviewComponent.prototype.formatWebsite = function (website) {
+        if (website && website.length > 0) {
+            website = website.replace('http://', '');
+            website = website.replace('https://', '');
+            website = website.replace(/\/$/, '');
+        }
+        return website;
     };
     return DishReviewComponent;
 }());
@@ -52,7 +85,8 @@ DishReviewComponent = __decorate([
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router,
         dish_search_service_1.DishSearchService,
-        tag_service_1.TagService])
+        tag_service_1.TagService,
+        core_2.MapsAPILoader])
 ], DishReviewComponent);
 exports.DishReviewComponent = DishReviewComponent;
 //# sourceMappingURL=dish-reviews.component.js.map

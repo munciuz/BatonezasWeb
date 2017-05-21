@@ -12,6 +12,10 @@ import { IDishReviewListItem } from "../../shared/models/dish-review-list-item";
 
 import { DishSearchService } from "../dish-search.service";
 
+import { MapsAPILoader } from 'angular2-google-maps/core';
+
+declare var google: any;
+
 @Component({
     moduleId: module.id,
     templateUrl: './dish-reviews.component.html'
@@ -23,6 +27,7 @@ export class DishReviewComponent implements OnInit {
     title: string = 'My first angular2-google-maps project';
     lat: number = 51.678418;
     lng: number = 7.809007;
+    gdetails: any = {};
 
     dishName: string = '';
 
@@ -34,10 +39,10 @@ export class DishReviewComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private dishSearchService: DishSearchService,
-        private tagService: TagService) { }
+        private tagService: TagService,
+        private _mapsAPILoader: MapsAPILoader) { }
 
     ngOnInit() {
-
         this.sub = this.route.params.subscribe(
             params => {
                 this.dishId = params['dishId'];
@@ -45,7 +50,6 @@ export class DishReviewComponent implements OnInit {
 
                 this.dishSearchService.getDishReviews(this.dishId, this.placeId)
                     .subscribe(dishReviews => {
-                        console.log(dishReviews);
                         this.dishReviews = dishReviews;
                         this.dishName = dishReviews[0].name;
                     });
@@ -55,8 +59,42 @@ export class DishReviewComponent implements OnInit {
                         this.lat = +place.lat;
                         this.lng = +place.lng;
                         this.title = place.name;
+                        console.log(place.gId);
+
+                        this.getGooglePlaceDetails(place.gId);
                     });
             }
         )
+    }
+
+    getGooglePlaceDetails(gid: string) {
+        this._mapsAPILoader.load().then(() => {
+            console.log(google);
+            let map = new google.maps.Map(document.createElement('div'));
+            let placesService = new google.maps.places.PlacesService(map);
+
+            /* Get place details */
+            placesService.getDetails({
+                placeId: gid
+            }, (placeResult: any, status: any) => {
+                if (status === 'OK') {
+                    this.gdetails = placeResult;
+                    console.log('got result ', placeResult);
+                } else {
+                    console.log('got some errors: ', status);
+                }
+            });
+            // Place your code in here...
+        });
+    }
+
+    formatWebsite(website: string): string {
+        if (website && website.length > 0) {
+            website = website.replace('http://', '');
+            website = website.replace('https://', '');
+            website = website.replace(/\/$/, '');
+        }
+
+        return website;
     }
 }

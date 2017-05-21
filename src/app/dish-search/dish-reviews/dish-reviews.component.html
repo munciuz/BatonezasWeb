@@ -21,39 +21,13 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="row"><b><h3>Grll London</h3></b></div>
-        <div class="row">K. Baršausko gatvė 66A, Kaunas</div>
-        <div class="row">+370 604 00024</div>
-        <div class="row"><a href="http://www.facebook.com/grilllondon" target="_blank">www.facebook.com/grilllondon</a></div>
+        <div class="row"><b><h3>{{gdetails?.name}}</h3></b></div>
+        <div class="row">{{gdetails?.vicinity}}</div>
+        <div class="row">{{gdetails.international_phone_number}}</div>
+        <div class="row"><a href="http://www.facebook.com/grilllondon" target="_blank">{{formatWebsite(gdetails.website)}}</a></div>
         <br>
-        <div class="row"><b>Darbo laikas</b></div>
-        <div class="row">
-            <div class=col-xs-4>Pirmadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Antradienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Trečiadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Ketvirtadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Penktadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Šeštadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
-        </div>
-        <div class="row">
-            <div class=col-xs-4>Sekdmadienis</div>
-            <div class=col-xs-8>10:00 - 22:00</div>
+        <div *ngIf="gdetails.opening_hours">
+            <comp-work-hours [openingHours]="gdetails.opening_hours"></comp-work-hours>
         </div>
         <br>
         <div class="row">

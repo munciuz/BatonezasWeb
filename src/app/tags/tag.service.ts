@@ -9,12 +9,13 @@ import { ITagListItem } from "./tag-list/tag-list-item";
 import { ITag } from "./tag/tag";
 
 import { Apis } from "../shared/apis";
+import { HttpClient } from "../shared/httpClient";
 
 @Injectable()
 
 export class TagService {
 
-    constructor(private http: Http, private apis: Apis) { }
+    constructor(private http: HttpClient, private apis: Apis) { }
 
     getTagList(): Observable<ITagListItem[]> {
         return this.http.get(this.apis.Tag.GetAll)
@@ -29,19 +30,13 @@ export class TagService {
     }
 
     createTag(tag: ITag): Observable<any> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers }); 
-
-        return this.http.post(this.apis.Tag.Create, tag, headers) 
+        return this.http.post(this.apis.Tag.Create, tag) 
             .map((res: Response) => res.json()) 
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
     }
 
-    editTag(dishType: ITag): Observable<any> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers }); 
-
-        return this.http.post(this.apis.Tag.Edit, dishType, headers) 
+    editTag(tag: ITag): Observable<any> {
+        return this.http.post(this.apis.Tag.Edit, tag) 
             .map((res: Response) => res.json()) 
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
     }

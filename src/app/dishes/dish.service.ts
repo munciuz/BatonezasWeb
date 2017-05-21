@@ -9,12 +9,13 @@ import { IDishListItem } from "./dish-list/dish-list-item";
 import { IDish } from "./dish/dish";
 
 import { Apis } from "../shared/apis";
+import { HttpClient } from "../shared/httpClient";
 
 @Injectable()
 
 export class DishService {
 
-    constructor(private http: Http, private apis: Apis) { }
+    constructor(private http: HttpClient, private apis: Apis) { }
 
     getDishList(): Observable<IDishListItem[]> {
         return this.http.get(this.apis.Dish.GetAll)
@@ -32,16 +33,14 @@ export class DishService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers }); 
 
-        return this.http.post(this.apis.Dish.Create, dish, headers) 
+        return this.http.post(this.apis.Dish.Create, dish) 
             .map((res: Response) => res.json()) 
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
     }
 
     editDish(dish: IDish): Observable<any> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers }); 
-
-        return this.http.post(this.apis.Dish.Edit, dish, headers) 
+        console.log('this is dish service before editing data: ', dish);
+        return this.http.post(this.apis.Dish.Edit, dish) 
             .map((res: Response) => res.json()) 
             .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
     }

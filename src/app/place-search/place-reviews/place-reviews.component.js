@@ -13,16 +13,19 @@ var router_1 = require("@angular/router");
 var tag_service_1 = require("../../tags/tag.service");
 var dish_search_service_1 = require("../../dish-search/dish-search.service");
 var place_search_service_1 = require("../place-search.service");
+var core_2 = require("angular2-google-maps/core");
 var PlaceReviewComponent = (function () {
-    function PlaceReviewComponent(route, router, placeSearchService, tagService, dishSearchService) {
+    function PlaceReviewComponent(route, router, placeSearchService, tagService, dishSearchService, _mapsAPILoader) {
         this.route = route;
         this.router = router;
         this.placeSearchService = placeSearchService;
         this.tagService = tagService;
         this.dishSearchService = dishSearchService;
+        this._mapsAPILoader = _mapsAPILoader;
         this.title = 'My first angular2-google-maps project';
         this.lat = 51.678418;
         this.lng = 7.809007;
+        this.gdetails = {};
     }
     PlaceReviewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -38,8 +41,38 @@ var PlaceReviewComponent = (function () {
                 _this.lat = +place.lat;
                 _this.lng = +place.lng;
                 _this.title = place.name;
+                _this.getGooglePlaceDetails(place.gId);
             });
         });
+    };
+    PlaceReviewComponent.prototype.getGooglePlaceDetails = function (gid) {
+        var _this = this;
+        this._mapsAPILoader.load().then(function () {
+            console.log(google);
+            var map = new google.maps.Map(document.createElement('div'));
+            var placesService = new google.maps.places.PlacesService(map);
+            /* Get place details */
+            placesService.getDetails({
+                placeId: gid
+            }, function (placeResult, status) {
+                if (status === 'OK') {
+                    _this.gdetails = placeResult;
+                    console.log('got result ', placeResult);
+                }
+                else {
+                    console.log('got some errors: ', status);
+                }
+            });
+            // Place your code in here...
+        });
+    };
+    PlaceReviewComponent.prototype.formatWebsite = function (website) {
+        if (website && website.length > 0) {
+            website = website.replace('http://', '');
+            website = website.replace('https://', '');
+            website = website.replace(/\/$/, '');
+        }
+        return website;
     };
     return PlaceReviewComponent;
 }());
@@ -52,7 +85,8 @@ PlaceReviewComponent = __decorate([
         router_1.Router,
         place_search_service_1.PlaceSearchService,
         tag_service_1.TagService,
-        dish_search_service_1.DishSearchService])
+        dish_search_service_1.DishSearchService,
+        core_2.MapsAPILoader])
 ], PlaceReviewComponent);
 exports.PlaceReviewComponent = PlaceReviewComponent;
 //# sourceMappingURL=place-reviews.component.js.map

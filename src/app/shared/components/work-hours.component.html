@@ -1,0 +1,5 @@
+<div class="row"><b>Darbo laikas</b></div>
+<div class="row" *ngFor="let day of days">
+    <div class=col-xs-4>{{getDayName(day)}}</div>
+    <div class=col-xs-8>{{getWorkingHoursForTheDay(day)}}</div>
+</div>

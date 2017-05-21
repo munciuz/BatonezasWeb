@@ -14,6 +14,10 @@ import { IPlaceReviewListItem } from "../../shared/models/place-review-list-item
 
 import { PlaceSearchService } from "../place-search.service";
 
+import { MapsAPILoader } from 'angular2-google-maps/core';
+
+declare var google: any;
+
 @Component({
     moduleId: module.id,
     templateUrl: './place-reviews.component.html'
@@ -25,6 +29,7 @@ export class PlaceReviewComponent implements OnInit {
     title: string = 'My first angular2-google-maps project';
     lat: number = 51.678418;
     lng: number = 7.809007;
+    gdetails: any = {};
 
     placeReviews: IPlaceReviewListItem[];
 
@@ -35,7 +40,8 @@ export class PlaceReviewComponent implements OnInit {
         private router: Router,
         private placeSearchService: PlaceSearchService,
         private tagService: TagService,
-        private dishSearchService: DishSearchService) { }
+        private dishSearchService: DishSearchService,
+        private _mapsAPILoader: MapsAPILoader) { }
 
     ngOnInit() {
 
@@ -54,7 +60,40 @@ export class PlaceReviewComponent implements OnInit {
                         this.lat = +place.lat;
                         this.lng = +place.lng;
                         this.title = place.name;
+
+                        this.getGooglePlaceDetails(place.gId);
                     });
             })
+    }
+
+    getGooglePlaceDetails(gid: string) {
+        this._mapsAPILoader.load().then(() => {
+            console.log(google);
+            let map = new google.maps.Map(document.createElement('div'));
+            let placesService = new google.maps.places.PlacesService(map);
+
+            /* Get place details */
+            placesService.getDetails({
+                placeId: gid
+            }, (placeResult: any, status: any) => {
+                if (status === 'OK') {
+                    this.gdetails = placeResult;
+                    console.log('got result ', placeResult);
+                } else {
+                    console.log('got some errors: ', status);
+                }
+            });
+            // Place your code in here...
+        });
+    }
+
+    formatWebsite(website: string): string {
+        if (website && website.length > 0) {
+            website = website.replace('http://', '');
+            website = website.replace('https://', '');
+            website = website.replace(/\/$/, '');
+        }
+
+        return website;
     }
 }

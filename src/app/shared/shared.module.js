@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var star_component_1 = require("./star.component");
+var work_hours_component_1 = require("./components/work-hours.component");
 var SharedModule = (function () {
     function SharedModule() {
     }
@@ -16,12 +17,13 @@ var SharedModule = (function () {
 }());
 SharedModule = __decorate([
     core_1.NgModule({
-        declarations: [star_component_1.StarComponent],
+        declarations: [star_component_1.StarComponent, work_hours_component_1.WorkHoursComponent],
         imports: [common_1.CommonModule],
         exports: [
             common_1.CommonModule,
             forms_1.FormsModule,
             star_component_1.StarComponent,
+            work_hours_component_1.WorkHoursComponent
         ]
     })
 ], SharedModule);

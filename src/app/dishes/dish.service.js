@@ -15,6 +15,7 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 var apis_1 = require("../shared/apis");
+var httpClient_1 = require("../shared/httpClient");
 var DishService = (function () {
     function DishService(http, apis) {
         this.http = http;
@@ -33,14 +34,13 @@ var DishService = (function () {
     DishService.prototype.createDish = function (dish) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apis.Dish.Create, dish, headers)
+        return this.http.post(this.apis.Dish.Create, dish)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
     };
     DishService.prototype.editDish = function (dish) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.apis.Dish.Edit, dish, headers)
+        console.log('this is dish service before editing data: ', dish);
+        return this.http.post(this.apis.Dish.Edit, dish)
             .map(function (res) { return res.json(); })
             .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
     };
@@ -51,7 +51,7 @@ var DishService = (function () {
 }());
 DishService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, apis_1.Apis])
+    __metadata("design:paramtypes", [httpClient_1.HttpClient, apis_1.Apis])
 ], DishService);
 exports.DishService = DishService;
 //# sourceMappingURL=dish.service.js.map
