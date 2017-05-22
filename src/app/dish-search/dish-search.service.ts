@@ -8,6 +8,7 @@ import { IGroupedDishReviewListItem } from "../shared/models/grouped-dish-review
 import { IDishSearchPageModel } from "../shared/models/dish-search-page-model";
 import { IDishReviewListItem } from "../shared/models/dish-review-list-item";
 import { IPlace } from "../shared/models/place";
+import { ITagListItem } from "../tags/tag-list/tag-list-item";
 
 import { Apis } from "../shared/apis";
 import { HttpClient } from "../shared/httpClient";
@@ -38,5 +39,10 @@ export class DishSearchService {
     getPlace(id: number): Observable<IPlace> {
         return this.httpClient.get(this.apis.Place.Get + id)
             .map((response: Response) => <IPlace>response.json());
+    }
+
+    getTagList(): Observable<ITagListItem[]> {
+        return this.http.get(this.apis.Tag.GetAll)
+            .map((response: Response) => <ITagListItem[]>response.json());
     }
 }   

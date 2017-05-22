@@ -14,8 +14,7 @@ import { IGroupedDishReviewListItem } from "../../shared/models/grouped-dish-rev
 import { PlaceSearchService } from "../place-search.service";
 import { IGroupedPlaceReviewListItem } from "../../shared/models/grouped-place-review-list-item";
 
-
-// import * as _ from 'lodash';
+import * as _ from 'lodash';
 
 @Component({
     moduleId: module.id,
@@ -23,11 +22,8 @@ import { IGroupedPlaceReviewListItem } from "../../shared/models/grouped-place-r
 })
 
 export class PlaceSearchComponent implements OnInit {
-    dishFilter: { dishName: string, dishId: number } = { dishName: '', dishId: null };
     cityFilter: ICity = { name: '', lat: null, lng: null };
-    tagFilter: number[] = [];
-    formedFilteredTagName: string = '';
-    vegetarianFilter: boolean = false;
+    placeTypeFilter: number = null;
     ratingFilter: number = null;
 
     optionsModel: number[];
@@ -39,6 +35,7 @@ export class PlaceSearchComponent implements OnInit {
     dishList: IDishListItem[];
 
     placeReviewList: IGroupedPlaceReviewListItem[];
+    filteredPlaceReviewList: IGroupedPlaceReviewListItem[];
 
     private sub: Subscription
 
@@ -52,6 +49,7 @@ export class PlaceSearchComponent implements OnInit {
         this.placeSearchService.getPlaceReviewPageModel()
             .subscribe(pageModel => {
                 this.placeReviewList = pageModel.groupedPlacesList;
+                this.filteredPlaceReviewList = pageModel.groupedPlacesList;
 
                 console.log(pageModel);
             });
@@ -61,4 +59,85 @@ export class PlaceSearchComponent implements OnInit {
         console.log(this.optionsModel);
     }
 
+    getPlaceTypeName(){
+        switch(this.placeTypeFilter){
+            case 1: return 'Restoranas';
+            case 2: return 'Kavinė';
+            case 3: return 'Baras';
+            case 4: return 'Kepyklėlė';
+            case 5: return 'Į namus';
+            case 6: return 'Išsinešimui';
+            case 7: return 'Naktinis klubas';
+            default: return 'Tipas';
+        }
+    }
+
+    getRatingDisplayName(){
+        if (this.ratingFilter > 0){
+            return this.ratingFilter;
+        } else {
+            return 'Reitingas';
+        }
+    }
+
+    setPlaceType(placeTypeId: number){
+        this.placeTypeFilter = placeTypeId
+    }
+
+    setRating(rating: number) {
+        this.ratingFilter = rating;
+
+        this.applyFilters();
+    }
+
+    applyFilters() {
+        this.filteredPlaceReviewList = this.placeReviewList;
+
+        this.applyCityFilter();
+        this.applyTypeFilter();
+        this.applyRatingFilter();
+    }
+
+    applyCityFilter() {
+        let self = this;
+
+        // if (this.cityFilter && this.cityFilter.lat && this.cityFilter.lng) {
+        //     this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
+        //         let distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, self.cityFilter.lat, self.cityFilter.lng);
+
+        //         console.log(o.placeName + ' ' + self.cityFilter.name + ' ' + distance);
+
+        //         return distance < 5;
+        //     });
+        // }
+    }
+
+    applyTypeFilter() {
+        let self = this;
+
+        if (this.placeTypeFilter) {
+            let typeId = this.placeTypeFilter;
+
+            this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
+                for (var i = 0; i < o.placeTypeIds.length; i++) {
+                    console.log(o.placeTypeIds[i] + ' == ' + typeId);
+                    if (o.placeTypeIds[i] == typeId) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+        }
+    }
+
+    applyRatingFilter() {
+        if (this.ratingFilter) {
+            let rating = this.ratingFilter;
+
+            this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
+                return o.ratingAverage >= rating;
+            });
+        }
+    }
 }

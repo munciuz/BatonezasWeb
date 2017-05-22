@@ -12,20 +12,26 @@ export class WorkHoursComponent {
 
     days: number[] = [1, 2, 3, 4, 5, 6, 0]; // 0 - Sunday
 
-    getWorkingHoursForTheDay(day: number){
+    getWorkingHoursForTheDay(day: number) {
         let period: any = this.openingHours.periods[day];
 
-        var openHours = period.open.time.substr(0, 2) + ':' + period.open.time.substr(2);
-        openHours = openHours.replace(/^0/, '');
+        if (period) {
+            var openHours = period.open.time.substr(0, 2) + ':' + period.open.time.substr(2);
+            openHours = openHours.replace(/^0/, '');
 
-        var closeHours = period.close.time.substr(0, 2) + ':' + period.close.time.substr(2);
+            var closeHours = period.close.time.substr(0, 2) + ':' + period.close.time.substr(2);
 
 
-        return openHours + ' - ' + closeHours;
+            return openHours + ' - ' + closeHours;
+        }
+        else {
+            return 'Nėra duomenų';
+        }
+
     }
 
-    getDayName(day:number): string{
-        switch (day){
+    getDayName(day: number): string {
+        switch (day) {
             case 1: return 'Pirmadienis';
             case 2: return 'Antradienis';
             case 3: return 'Trečiadienis';

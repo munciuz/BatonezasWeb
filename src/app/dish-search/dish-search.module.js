@@ -14,6 +14,7 @@ var apis_1 = require("../shared/apis");
 var httpClient_1 = require("../shared/httpClient");
 var authentication_service_1 = require("../shared/authentication.service");
 var core_module_1 = require("angular2-google-maps/core/core-module");
+var dish_search_pipe_1 = require("./dish-search/dish-search.pipe");
 // import { WorkHoursComponent } from "../shared/components/work-hours.component";
 // import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 var shared_module_1 = require("../shared/shared.module");
@@ -27,6 +28,7 @@ DishSearchModule = __decorate([
         declarations: [
             dish_search_component_1.DishSearchComponent,
             dish_reviews_component_1.DishReviewComponent,
+            dish_search_pipe_1.DishSearchFilterPipe
         ],
         imports: [
             shared_module_1.SharedModule,

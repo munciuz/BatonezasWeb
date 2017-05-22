@@ -5,4 +5,7 @@ export interface IGroupedPlaceReviewListItem {
     ratingAverage: number;
     reviewCount: number;
     imageUri: string;
+    lat: number;
+    lng: number;
+    placeTypeIds: number[];
 }

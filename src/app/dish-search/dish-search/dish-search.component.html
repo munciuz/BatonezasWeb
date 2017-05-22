@@ -1,7 +1,18 @@
+<!--<div class="container">
+    <h1>Angular 2 + Google Maps Places Autocomplete</h1>
+    <div class="form-group">
+        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+            #search [formControl]="searchControl">
+    </div>
+    <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
+    </sebm-google-map>
+</div>-->
+
 <nav class="row">
     <ul class="filter-container nav navbar-nav">
-        <li class="filter-element"><input type="text" placeholder="Patiekalas"></li>
-        <li class="filter-element"><input type="text" placeholder="Vieta"></li>
+        <li class="filter-element"><input type="text" [(ngModel)]="dishFilter" placeholder="Patiekalas"></li>
+        <li class="filter-element"><input type="text" [(ngModel)]="placeFilter" (input)="placeChanged($event.target.value)" placeholder="Vieta"></li>
         <li class="filter-element">
             <!--<ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>-->
             <!--<input type="text" placeholder="Žymės">-->
@@ -14,8 +25,7 @@
     <span class="caret"></span>
   </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>Vištiena</li>
-                    <li>Kiauliena</li>
+                    <li *ngFor="let tagItem of tagList">{{tagItem.name}}</li>
                 </ul>
             </div>
         </li>
@@ -23,15 +33,16 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
-    Reitingas
+    {{getRatingDisplayName()}}
     <span class="caret"></span>
   </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
+                    <li (click)="setRating(0)">0</li>
+                    <li (click)="setRating(1)">1</li>
+                    <li (click)="setRating(2)">2</li>
+                    <li (click)="setRating(3)">3</li>
+                    <li (click)="setRating(4)">4</li>
+                    <li (click)="setRating(5)">5</li>
                 </ul>
             </div>
         </li>
@@ -40,7 +51,8 @@
 </nav>
 
 <div class="row">
-    <div *ngFor="let dishReview of filteredDishReviewList; let i = index" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
+    <div *ngFor="let dishReview of filteredDishReviewList | dishSearchPipe: dishFilter; let i = index" class="col-xs-6 col-sm-4 col-md-3 col-lg-3"
+        [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
 
         <div style="min-height: 290px;" class="thumbnail">
             <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">

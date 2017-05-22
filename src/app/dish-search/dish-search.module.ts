@@ -8,6 +8,7 @@ import { Apis } from "../shared/apis";
 import { HttpClient } from "../shared/httpClient";
 import { AuthenticationService } from "../shared/authentication.service";
 import { AgmCoreModule } from 'angular2-google-maps/core/core-module';
+import { DishSearchFilterPipe } from "./dish-search/dish-search.pipe";
 // import { WorkHoursComponent } from "../shared/components/work-hours.component";
 // import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
@@ -17,6 +18,7 @@ import { SharedModule } from "../shared/shared.module";
     declarations: [
         DishSearchComponent,
         DishReviewComponent,
+        DishSearchFilterPipe
         // WorkHoursComponent
     ],
     imports: [

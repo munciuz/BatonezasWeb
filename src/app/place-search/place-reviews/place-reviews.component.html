@@ -4,10 +4,8 @@
             <div class="thumbnail">
                 <img class="dish-search-image" src="{{placeReview.imageUri}}" alt="">
                 <div class="caption">
-                    <h4><a href="#">Apžvelgė - {{placeReview.reviewedBy}}</a>
-                    </h4>
+                    <h4>Apžvelgė - {{placeReview.reviewedBy}}</h4>
                     <div class="ratings">
-
                         <comp-star [rating]="placeReview.rating"></comp-star>
                     </div>
                     <p>{{placeReview.review}}</p>
@@ -32,6 +30,4 @@
             </sebm-google-map>
         </div>
     </div>
-
-    
 </div>

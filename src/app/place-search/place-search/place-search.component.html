@@ -6,15 +6,19 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
-    Tipas
+    {{getPlaceTypeName()}}
     <span class="caret"></span>
   </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>Restoranas</li>
-                    <li>Kavin4</li>
-                    <li>Baras</li>
-                    <li>Kepyklėlė</li>
-                    <li>Naktinis Klubas</li>
+                    <li (click)="setPlaceType(null)">Tipas</li>
+                    <li role="separator" class="divider"></li>
+                    <li (click)="setPlaceType(1)">Restoranas</li>
+                    <li (click)="setPlaceType(2)">Kavinė</li>
+                    <li (click)="setPlaceType(3)">Baras</li>
+                    <li (click)="setPlaceType(4)">Kepyklėlė</li>
+                    <li (click)="setPlaceType(5)">Į namus</li>
+                    <li (click)="setPlaceType(6)">Išsinešimui</li>
+                    <li (click)="setPlaceType(7)">Naktinis klubas</li>
                 </ul>
             </div>
         </li>
@@ -22,15 +26,16 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
-    Reitingas
+    {{getRatingDisplayName()}}
     <span class="caret"></span>
   </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
+                    <li (click)="setRating(0)">0</li>
+                    <li (click)="setRating(1)">1</li>
+                    <li (click)="setRating(2)">2</li>
+                    <li (click)="setRating(3)">3</li>
+                    <li (click)="setRating(4)">4</li>
+                    <li (click)="setRating(5)">5</li>
                 </ul>
             </div>
         </li>
@@ -38,7 +43,7 @@
 </nav>
 
 <div class="row">
-    <div *ngFor="let placeReview of placeReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/placeReviews', placeReview.placeId]">
+    <div *ngFor="let placeReview of filteredPlaceReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/placeReviews', placeReview.placeId]">
         <div class="thumbnail">
             <img class="dish-search-image" src="{{placeReview.imageUri}}" alt="">
             <div class="caption">

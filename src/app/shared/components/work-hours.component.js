@@ -15,10 +15,15 @@ var WorkHoursComponent = (function () {
     }
     WorkHoursComponent.prototype.getWorkingHoursForTheDay = function (day) {
         var period = this.openingHours.periods[day];
-        var openHours = period.open.time.substr(0, 2) + ':' + period.open.time.substr(2);
-        openHours = openHours.replace(/^0/, '');
-        var closeHours = period.close.time.substr(0, 2) + ':' + period.close.time.substr(2);
-        return openHours + ' - ' + closeHours;
+        if (period) {
+            var openHours = period.open.time.substr(0, 2) + ':' + period.open.time.substr(2);
+            openHours = openHours.replace(/^0/, '');
+            var closeHours = period.close.time.substr(0, 2) + ':' + period.close.time.substr(2);
+            return openHours + ' - ' + closeHours;
+        }
+        else {
+            return 'Nėra duomenų';
+        }
     };
     WorkHoursComponent.prototype.getDayName = function (day) {
         switch (day) {

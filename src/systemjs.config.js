@@ -34,6 +34,7 @@
       'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
       // 'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
       // 'ng2-dropdown-multiselect': 'npm:ng2-dropdown-multiselect'
+      'lodash': 'npm:lodash'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -49,6 +50,10 @@
         "main": "index.js"
       },
       'angular-2-dropdown-multiselect': {
+        "defaultExtension": 'js',
+        "main": 'index.js'
+      },
+      'lodash': {
         "defaultExtension": 'js',
         "main": 'index.js'
       },

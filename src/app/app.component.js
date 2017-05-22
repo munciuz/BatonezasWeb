@@ -27,7 +27,7 @@ var AppComponent = (function () {
             _this.logedIn = true;
             _this.roleId = result.roleId;
         }, function (error) {
-            console.log(error);
+            console.log('gavom va toki errora', error);
         });
     };
     AppComponent.prototype.isAdmin = function () {

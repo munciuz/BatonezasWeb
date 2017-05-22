@@ -14,13 +14,16 @@ var router_1 = require("@angular/router");
 var tag_service_1 = require("../../tags/tag.service");
 var dish_search_service_1 = require("../dish-search.service");
 // import * as _ from 'lodash';
+var core_2 = require("angular2-google-maps/core");
 var DishSearchComponent = (function () {
-    function DishSearchComponent(route, router, dishSearchService, tagService) {
+    function DishSearchComponent(route, router, dishSearchService, tagService, _mapsAPILoader) {
         this.route = route;
         this.router = router;
         this.dishSearchService = dishSearchService;
         this.tagService = tagService;
-        this.dishFilter = { dishName: '', dishId: null };
+        this._mapsAPILoader = _mapsAPILoader;
+        this.dishFilter = '';
+        this.placeFilter = '';
         this.cityFilter = { name: '', lat: null, lng: null };
         this.tagFilter = [];
         this.formedFilteredTagName = '';
@@ -28,16 +31,11 @@ var DishSearchComponent = (function () {
         this.ratingFilter = null;
     }
     DishSearchComponent.prototype.newRow = function (index) {
-        console.log(index);
         if (index % 4 === 0 || index === 0)
             return "row";
         return "";
     };
     DishSearchComponent.prototype.ngOnInit = function () {
-        // this.myOptions = [
-        //     { id: 1, name: 'Option 1' },
-        //     { id: 2, name: 'Option 2' },
-        // ];
         var _this = this;
         this.dishSearchService.getDishSearchPageModel()
             .subscribe(function (pageModel) {
@@ -45,11 +43,65 @@ var DishSearchComponent = (function () {
             _this.filteredDishReviewList = pageModel.dishReviewList;
             _this.tagList = pageModel.tagList;
             _this.dishList = pageModel.dishList;
-            console.log('got grouped dish reviews: ', pageModel);
+        });
+        this.dishSearchService.getTagList().subscribe(function (tags) {
+            _this.tagList = tags;
         });
     };
     DishSearchComponent.prototype.onChange = function () {
         console.log(this.optionsModel);
+    };
+    DishSearchComponent.prototype.placeChanged = function () {
+        var _this = this;
+        var self = this;
+        this._mapsAPILoader.load().then(function () {
+            var currentLocation = new google.maps.LatLng(54.9008465, 23.9609625);
+            var map = new google.maps.Map(document.createElement('div'));
+            var service = new google.maps.places.PlacesService(map);
+            var request = {
+                location: currentLocation,
+                types: ['(cities)'],
+                input: _this.cityFilter
+            };
+            service.textSearch(request, function (results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    console.log('god data from google ', results);
+                }
+                else {
+                    console.log('got error from google ', status);
+                }
+            });
+        });
+    };
+    DishSearchComponent.prototype.getRatingDisplayName = function () {
+        if (this.ratingFilter > 0) {
+            return this.ratingFilter;
+        }
+        else {
+            return 'Reitingas';
+        }
+    };
+    DishSearchComponent.prototype.setRating = function (rating) {
+        this.ratingFilter = rating;
+        this.applyFilters();
+    };
+    DishSearchComponent.prototype.applyFilters = function () {
+        this.filteredDishReviewList = this.dishReviewList;
+        this.applyPlaceFilter();
+        this.applyTagFilter();
+        this.applyRatingFilter();
+    };
+    DishSearchComponent.prototype.applyPlaceFilter = function () {
+    };
+    DishSearchComponent.prototype.applyTagFilter = function () {
+    };
+    DishSearchComponent.prototype.applyRatingFilter = function () {
+        if (this.ratingFilter) {
+            var rating_1 = this.ratingFilter;
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                return o.ratingAverage >= rating_1;
+            });
+        }
     };
     return DishSearchComponent;
 }());
@@ -61,7 +113,8 @@ DishSearchComponent = __decorate([
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router,
         dish_search_service_1.DishSearchService,
-        tag_service_1.TagService])
+        tag_service_1.TagService,
+        core_2.MapsAPILoader])
 ], DishSearchComponent);
 exports.DishSearchComponent = DishSearchComponent;
 //# sourceMappingURL=dish-search.component.js.map

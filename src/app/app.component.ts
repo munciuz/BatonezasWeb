@@ -30,7 +30,7 @@ export class AppComponent {
             this.roleId = result.roleId;
         },
             error => {
-                console.log(error);
+                console.log('gavom va toki errora', error);
             });
     }
 
