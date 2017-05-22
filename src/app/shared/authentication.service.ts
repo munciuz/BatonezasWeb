@@ -23,6 +23,12 @@ export class AuthenticationService {
         this.RemoveLocalStorage('roleId');
     }
 
+    IsAdmin() {
+        if (this.roleId && this.roleId == 1)
+            return true;
+        else return false;
+    }
+
     SetToken(token: string) {
         this.SetLocalStorage('token', token);
     }

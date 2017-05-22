@@ -42,7 +42,12 @@ export class DishSearchService {
     }
 
     getTagList(): Observable<ITagListItem[]> {
-        return this.http.get(this.apis.Tag.GetAll)
+        return this.httpClient.get(this.apis.Tag.GetAll)
             .map((response: Response) => <ITagListItem[]>response.json());
+    }
+
+    deleteDishReview(id: number){
+        return this.httpClient.delete(this.apis.DishReview.Delete + id, id)
+            .map((response: Response) => response.json());
     }
 }   

@@ -31,19 +31,23 @@ var DishReviewComponent = (function () {
         this.sub = this.route.params.subscribe(function (params) {
             _this.dishId = params['dishId'];
             _this.placeId = params['placeId'];
-            _this.dishSearchService.getDishReviews(_this.dishId, _this.placeId)
-                .subscribe(function (dishReviews) {
-                _this.dishReviews = dishReviews;
-                _this.dishName = dishReviews[0].name;
-            });
-            _this.dishSearchService.getPlace(_this.placeId)
-                .subscribe(function (place) {
-                _this.lat = +place.lat;
-                _this.lng = +place.lng;
-                _this.title = place.name;
-                console.log(place.gId);
-                _this.getGooglePlaceDetails(place.gId);
-            });
+            _this.loadData();
+        });
+    };
+    DishReviewComponent.prototype.loadData = function () {
+        var _this = this;
+        this.dishSearchService.getDishReviews(this.dishId, this.placeId)
+            .subscribe(function (dishReviews) {
+            _this.dishReviews = dishReviews;
+            _this.dishName = dishReviews[0].name;
+        });
+        this.dishSearchService.getPlace(this.placeId)
+            .subscribe(function (place) {
+            _this.lat = +place.lat;
+            _this.lng = +place.lng;
+            _this.title = place.name;
+            console.log(place.gId);
+            _this.getGooglePlaceDetails(place.gId);
         });
     };
     DishReviewComponent.prototype.getGooglePlaceDetails = function (gid) {
@@ -76,7 +80,12 @@ var DishReviewComponent = (function () {
         return website;
     };
     DishReviewComponent.prototype.removeDishReview = function (id) {
-        console.log('removing dish review w/ id ', id);
+        var _this = this;
+        console.log(id);
+        this.dishSearchService.deleteDishReview(id)
+            .subscribe(function (result) {
+            _this.loadData();
+        });
     };
     return DishReviewComponent;
 }());

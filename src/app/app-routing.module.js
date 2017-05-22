@@ -19,8 +19,8 @@ AppRoutingModule = __decorate([
         imports: [
             router_1.RouterModule.forRoot([
                 { path: 'welcome', component: welcome_component_1.WelcomeComponent },
-                { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-                { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+                { path: '', redirectTo: 'dishSearch', pathMatch: 'full' },
+                { path: '**', redirectTo: 'dishSearch', pathMatch: 'full' }
             ])
         ],
         exports: [router_1.RouterModule]

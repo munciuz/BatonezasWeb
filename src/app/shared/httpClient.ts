@@ -32,4 +32,10 @@ export class HttpClient {
             headers: headers
         });
     }
+
+    delete(url: string, id: number) {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        this.createAuthorizationHeader(headers);
+        return this.http.delete(url, id);
+    }
 }

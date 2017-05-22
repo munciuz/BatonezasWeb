@@ -48,23 +48,27 @@ export class DishReviewComponent implements OnInit {
                 this.dishId = params['dishId'];
                 this.placeId = params['placeId'];
 
-                this.dishSearchService.getDishReviews(this.dishId, this.placeId)
-                    .subscribe(dishReviews => {
-                        this.dishReviews = dishReviews;
-                        this.dishName = dishReviews[0].name;
-                    });
-
-                this.dishSearchService.getPlace(this.placeId)
-                    .subscribe(place => {
-                        this.lat = +place.lat;
-                        this.lng = +place.lng;
-                        this.title = place.name;
-                        console.log(place.gId);
-
-                        this.getGooglePlaceDetails(place.gId);
-                    });
+                this.loadData();
             }
         )
+    }
+
+    loadData() {
+        this.dishSearchService.getDishReviews(this.dishId, this.placeId)
+            .subscribe(dishReviews => {
+                this.dishReviews = dishReviews;
+                this.dishName = dishReviews[0].name;
+            });
+
+        this.dishSearchService.getPlace(this.placeId)
+            .subscribe(place => {
+                this.lat = +place.lat;
+                this.lng = +place.lng;
+                this.title = place.name;
+                console.log(place.gId);
+
+                this.getGooglePlaceDetails(place.gId);
+            });
     }
 
     getGooglePlaceDetails(gid: string) {
@@ -98,7 +102,12 @@ export class DishReviewComponent implements OnInit {
         return website;
     }
 
-    removeDishReview(id: number){
-        console.log('removing dish review w/ id ', id);
+    removeDishReview(id: number) {
+        console.log(id);
+
+        this.dishSearchService.deleteDishReview(id)
+            .subscribe(result => {
+                this.loadData();
+            });
     }
 }

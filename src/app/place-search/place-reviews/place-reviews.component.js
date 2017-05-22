@@ -31,18 +31,22 @@ var PlaceReviewComponent = (function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
             _this.placeId = params['id'];
-            _this.placeSearchService.getPlaceReviews(_this.placeId)
-                .subscribe(function (placeReviews) {
-                console.log('got reviews', placeReviews);
-                _this.placeReviews = placeReviews;
-            });
-            _this.dishSearchService.getPlace(_this.placeId)
-                .subscribe(function (place) {
-                _this.lat = +place.lat;
-                _this.lng = +place.lng;
-                _this.title = place.name;
-                _this.getGooglePlaceDetails(place.gId);
-            });
+            _this.loadData();
+        });
+    };
+    PlaceReviewComponent.prototype.loadData = function () {
+        var _this = this;
+        this.placeSearchService.getPlaceReviews(this.placeId)
+            .subscribe(function (placeReviews) {
+            console.log('got reviews', placeReviews);
+            _this.placeReviews = placeReviews;
+        });
+        this.dishSearchService.getPlace(this.placeId)
+            .subscribe(function (place) {
+            _this.lat = +place.lat;
+            _this.lng = +place.lng;
+            _this.title = place.name;
+            _this.getGooglePlaceDetails(place.gId);
         });
     };
     PlaceReviewComponent.prototype.getGooglePlaceDetails = function (gid) {
@@ -73,6 +77,13 @@ var PlaceReviewComponent = (function () {
             website = website.replace(/\/$/, '');
         }
         return website;
+    };
+    PlaceReviewComponent.prototype.removePlaceReview = function (id) {
+        var _this = this;
+        this.placeSearchService.deletePlaceReview(id)
+            .subscribe(function (result) {
+            _this.loadData();
+        });
     };
     return PlaceReviewComponent;
 }());

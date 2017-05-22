@@ -36,6 +36,11 @@ var HttpClient = (function () {
             headers: headers
         });
     };
+    HttpClient.prototype.delete = function (url, id) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        this.createAuthorizationHeader(headers);
+        return this.http.delete(url, id);
+    };
     return HttpClient;
 }());
 HttpClient = __decorate([

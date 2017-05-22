@@ -49,21 +49,25 @@ export class PlaceReviewComponent implements OnInit {
             params => {
                 this.placeId = params['id'];
 
-                this.placeSearchService.getPlaceReviews(this.placeId)
-                    .subscribe(placeReviews => {
-                        console.log('got reviews', placeReviews);
-                        this.placeReviews = placeReviews;
-                    });
-
-                this.dishSearchService.getPlace(this.placeId)
-                    .subscribe(place => {
-                        this.lat = +place.lat;
-                        this.lng = +place.lng;
-                        this.title = place.name;
-
-                        this.getGooglePlaceDetails(place.gId);
-                    });
+                this.loadData();
             })
+    }
+
+    loadData() {
+        this.placeSearchService.getPlaceReviews(this.placeId)
+            .subscribe(placeReviews => {
+                console.log('got reviews', placeReviews);
+                this.placeReviews = placeReviews;
+            });
+
+        this.dishSearchService.getPlace(this.placeId)
+            .subscribe(place => {
+                this.lat = +place.lat;
+                this.lng = +place.lng;
+                this.title = place.name;
+
+                this.getGooglePlaceDetails(place.gId);
+            });
     }
 
     getGooglePlaceDetails(gid: string) {
@@ -95,5 +99,12 @@ export class PlaceReviewComponent implements OnInit {
         }
 
         return website;
+    }
+
+    removePlaceReview(id: number) {
+        this.placeSearchService.deletePlaceReview(id)
+            .subscribe(result => {
+                this.loadData();
+            });
     }
 }

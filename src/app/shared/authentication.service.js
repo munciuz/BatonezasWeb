@@ -26,6 +26,12 @@ var AuthenticationService = (function () {
         this.RemoveLocalStorage('username');
         this.RemoveLocalStorage('roleId');
     };
+    AuthenticationService.prototype.IsAdmin = function () {
+        if (this.roleId && this.roleId == 1)
+            return true;
+        else
+            return false;
+    };
     AuthenticationService.prototype.SetToken = function (token) {
         this.SetLocalStorage('token', token);
     };

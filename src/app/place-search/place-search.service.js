@@ -33,6 +33,10 @@ var PlaceSearchService = (function () {
         return this.httpClient.get(url)
             .map(function (response) { return response.json(); });
     };
+    PlaceSearchService.prototype.deletePlaceReview = function (id) {
+        return this.httpClient.delete(this.apis.PlaceReview.Delete + id, id)
+            .map(function (response) { return response.json(); });
+    };
     return PlaceSearchService;
 }());
 PlaceSearchService = __decorate([

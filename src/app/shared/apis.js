@@ -35,11 +35,13 @@ var Apis = (function () {
             GetAll: this.baseUrl + this.dishReview + this.getAll,
             GetPageModel: this.baseUrl + this.dishReview + this.getPageModel,
             Create: this.baseUrl + this.dishReview + this.create,
-            Edit: this.baseUrl + this.dishReview + this.edit
+            Edit: this.baseUrl + this.dishReview + this.edit,
+            Delete: this.baseUrl + this.dishReview + this.delete
         };
         this.PlaceReview = {
             Get: this.baseUrl + this.placeReview + this.get,
             GetAll: this.baseUrl + this.placeReview + this.getAll,
+            Delete: this.baseUrl + this.placeReview + this.delete,
             GetPageModel: this.baseUrl + this.placeReview + this.getPageModel,
             Create: this.baseUrl + this.placeReview + this.create,
             Edit: this.baseUrl + this.placeReview + this.edit,

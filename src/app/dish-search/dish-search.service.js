@@ -36,7 +36,11 @@ var DishSearchService = (function () {
             .map(function (response) { return response.json(); });
     };
     DishSearchService.prototype.getTagList = function () {
-        return this.http.get(this.apis.Tag.GetAll)
+        return this.httpClient.get(this.apis.Tag.GetAll)
+            .map(function (response) { return response.json(); });
+    };
+    DishSearchService.prototype.deleteDishReview = function (id) {
+        return this.httpClient.delete(this.apis.DishReview.Delete + id, id)
             .map(function (response) { return response.json(); });
     };
     return DishSearchService;

@@ -34,4 +34,9 @@ export class PlaceSearchService {
         return this.httpClient.get(url)
             .map((response: Response) => <IPlaceReviewListItem[]>response.json());
     }
+
+    deletePlaceReview(id: number){
+        return this.httpClient.delete(this.apis.PlaceReview.Delete + id, id)
+            .map((response: Response) => response.json());
+    }
 }   
