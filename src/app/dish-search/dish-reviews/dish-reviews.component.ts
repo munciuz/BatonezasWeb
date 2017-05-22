@@ -97,4 +97,8 @@ export class DishReviewComponent implements OnInit {
 
         return website;
     }
+
+    removeDishReview(id: number){
+        console.log('removing dish review w/ id ', id);
+    }
 }

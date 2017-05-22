@@ -13,7 +13,7 @@ var router_1 = require("@angular/router");
 // import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 var tag_service_1 = require("../../tags/tag.service");
 var dish_search_service_1 = require("../dish-search.service");
-// import * as _ from 'lodash';
+var _ = require("lodash");
 var core_2 = require("angular2-google-maps/core");
 var DishSearchComponent = (function () {
     function DishSearchComponent(route, router, dishSearchService, tagService, _mapsAPILoader) {

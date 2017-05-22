@@ -5,7 +5,7 @@
         </div>
         <div *ngFor="let dishReview of dishReviews" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="thumbnail">
-                <span style="position: absolute" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <span style="position: absolute" class="glyphicon glyphicon-remove" aria-hidden="true" (click)="removeDishReview(dishReview.id)"></span>
                 <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">
                 <div class="caption">
                     <h4>Apžvelgė - {{dishReview.reviewedBy}}</h4>

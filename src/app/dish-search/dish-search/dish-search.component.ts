@@ -13,7 +13,7 @@ import { IGroupedDishReviewListItem } from "../../shared/models/grouped-dish-rev
 
 import { DishSearchService } from "../dish-search.service";
 
-// import * as _ from 'lodash';
+import * as _ from 'lodash';
 
 import { MapsAPILoader } from 'angular2-google-maps/core';
 

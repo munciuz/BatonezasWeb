@@ -75,6 +75,9 @@ var DishReviewComponent = (function () {
         }
         return website;
     };
+    DishReviewComponent.prototype.removeDishReview = function (id) {
+        console.log('removing dish review w/ id ', id);
+    };
     return DishReviewComponent;
 }());
 DishReviewComponent = __decorate([
