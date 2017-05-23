@@ -24,6 +24,7 @@ var DishReviewComponent = (function () {
         this.lat = 51.678418;
         this.lng = 7.809007;
         this.gdetails = {};
+        this.isAdmin = false;
         this.dishName = '';
     }
     DishReviewComponent.prototype.ngOnInit = function () {
@@ -33,6 +34,7 @@ var DishReviewComponent = (function () {
             _this.placeId = params['placeId'];
             _this.loadData();
         });
+        this.isAdmin = window.localStorage.getItem('roleId') == '1';
     };
     DishReviewComponent.prototype.loadData = function () {
         var _this = this;

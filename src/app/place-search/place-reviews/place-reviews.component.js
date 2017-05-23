@@ -26,6 +26,7 @@ var PlaceReviewComponent = (function () {
         this.lat = 51.678418;
         this.lng = 7.809007;
         this.gdetails = {};
+        this.isAdmin = false;
     }
     PlaceReviewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -33,6 +34,7 @@ var PlaceReviewComponent = (function () {
             _this.placeId = params['id'];
             _this.loadData();
         });
+        this.isAdmin = window.localStorage.getItem('roleId') == '1';
     };
     PlaceReviewComponent.prototype.loadData = function () {
         var _this = this;

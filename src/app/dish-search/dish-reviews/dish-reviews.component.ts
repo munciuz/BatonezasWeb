@@ -28,6 +28,7 @@ export class DishReviewComponent implements OnInit {
     lat: number = 51.678418;
     lng: number = 7.809007;
     gdetails: any = {};
+    isAdmin: boolean = false;
 
     dishName: string = '';
 
@@ -51,6 +52,8 @@ export class DishReviewComponent implements OnInit {
                 this.loadData();
             }
         )
+
+        this.isAdmin = window.localStorage.getItem('roleId') == '1';
     }
 
     loadData() {

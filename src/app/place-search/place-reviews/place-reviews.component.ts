@@ -30,6 +30,7 @@ export class PlaceReviewComponent implements OnInit {
     lat: number = 51.678418;
     lng: number = 7.809007;
     gdetails: any = {};
+    isAdmin: boolean = false;
 
     placeReviews: IPlaceReviewListItem[];
 
@@ -51,6 +52,8 @@ export class PlaceReviewComponent implements OnInit {
 
                 this.loadData();
             })
+
+            this.isAdmin = window.localStorage.getItem('roleId') == '1';
     }
 
     loadData() {

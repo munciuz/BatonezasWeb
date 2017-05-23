@@ -26,6 +26,7 @@ var AppComponent = (function () {
             _this.username = result.username;
             _this.logedIn = true;
             _this.roleId = result.roleId;
+            _this.authenticationService.SetRole(result.roleId);
         }, function (error) {
             console.log('gavom va toki errora', error);
         });

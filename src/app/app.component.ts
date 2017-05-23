@@ -28,6 +28,8 @@ export class AppComponent {
             this.username = result.username;
             this.logedIn = true;
             this.roleId = result.roleId;
+
+            this.authenticationService.SetRole(result.roleId);
         },
             error => {
                 console.log('gavom va toki errora', error);
