@@ -8,11 +8,10 @@
         <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
     </sebm-google-map>
 </div>-->
-
 <nav class="row">
     <ul class="filter-container nav navbar-nav">
         <li class="filter-element"><input type="text" [(ngModel)]="dishFilter" placeholder="Patiekalas"></li>
-        <li class="filter-element"><input type="text" [(ngModel)]="placeFilter" (input)="placeChanged($event.target.value)" placeholder="Vieta"></li>
+        <li class="filter-element"><input id="placeAutocomplete" (input)="placeChanged($event.target.value)" type="text" [(ngModel)]="placeFilter" placeholder="Vieta"></li>
         <li class="filter-element">
             <!--<ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>-->
             <!--<input type="text" placeholder="Žymės">-->
@@ -21,11 +20,13 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
-    Žymės
+    {{getTagDropdownDisplayName()}}
     <span class="caret"></span>
   </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li *ngFor="let tagItem of tagList">{{tagItem.name}}</li>
+                    <li (click)="setTag(null)">Žymės</li>
+                    <li role="separator" class="divider"></li>
+                    <li *ngFor="let tagItem of tagList" (click)="setTag(tagItem)">{{tagItem.name}}</li>
                 </ul>
             </div>
         </li>
@@ -46,7 +47,9 @@
                 </ul>
             </div>
         </li>
-        <li class="filter-element">Vegetariškas <input type="checkbox"></li>
+        <li class="filter-element">
+            <button type="button" [class]="getVegetarianButtonClass()" (click)="toggleVegetarian()">Vegetariški</button>
+        </li>
     </ul>
 </nav>
 
@@ -54,7 +57,7 @@
     <div *ngFor="let dishReview of filteredDishReviewList | dishSearchPipe: dishFilter; let i = index" class="col-xs-6 col-sm-4 col-md-3 col-lg-3"
         [routerLink]="['/dishReviews', dishReview.dishId, dishReview.placeId]">
 
-        <div style="min-height: 290px;" class="thumbnail">
+        <div style="min-height: 240px;" class="thumbnail">
             <img class="dish-search-image" src="{{dishReview.imageUri}}" alt="">
             <div class="caption">
                 <h4><a href="#">{{dishReview.dishName}}</a>

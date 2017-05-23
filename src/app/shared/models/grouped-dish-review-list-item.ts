@@ -10,4 +10,5 @@ export interface IGroupedDishReviewListItem {
     tagsIds: number[];
     lat: number;
     lng: number;
+    isVegetarian: boolean;
 }

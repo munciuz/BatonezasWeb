@@ -25,10 +25,10 @@ var DishSearchComponent = (function () {
         this.dishFilter = '';
         this.placeFilter = '';
         this.cityFilter = { name: '', lat: null, lng: null };
-        this.tagFilter = [];
-        this.formedFilteredTagName = '';
+        this.tagFilter = null;
         this.vegetarianFilter = false;
         this.ratingFilter = null;
+        this.gplace = null;
     }
     DishSearchComponent.prototype.newRow = function (index) {
         if (index % 4 === 0 || index === 0)
@@ -47,31 +47,23 @@ var DishSearchComponent = (function () {
         this.dishSearchService.getTagList().subscribe(function (tags) {
             _this.tagList = tags;
         });
+        this._mapsAPILoader.load().then(function () {
+            var autocomplete = new google.maps.places.Autocomplete(document.getElementById("placeAutocomplete"), {});
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                _this.gplace = autocomplete.getPlace();
+                console.log(_this.gplace);
+                _this.applyFilters();
+            });
+        });
     };
     DishSearchComponent.prototype.onChange = function () {
         console.log(this.optionsModel);
     };
     DishSearchComponent.prototype.placeChanged = function () {
-        var _this = this;
-        var self = this;
-        this._mapsAPILoader.load().then(function () {
-            var currentLocation = new google.maps.LatLng(54.9008465, 23.9609625);
-            var map = new google.maps.Map(document.createElement('div'));
-            var service = new google.maps.places.PlacesService(map);
-            var request = {
-                location: currentLocation,
-                types: ['(cities)'],
-                input: _this.cityFilter
-            };
-            service.textSearch(request, function (results, status) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    console.log('god data from google ', results);
-                }
-                else {
-                    console.log('got error from google ', status);
-                }
-            });
-        });
+        if (this.placeFilter.length == 0) {
+            this.gplace = null;
+            this.applyFilters();
+        }
     };
     DishSearchComponent.prototype.getRatingDisplayName = function () {
         if (this.ratingFilter > 0) {
@@ -80,6 +72,10 @@ var DishSearchComponent = (function () {
         else {
             return 'Reitingas';
         }
+    };
+    DishSearchComponent.prototype.setTag = function (tag) {
+        this.tagFilter = tag;
+        this.applyFilters();
     };
     DishSearchComponent.prototype.setRating = function (rating) {
         this.ratingFilter = rating;
@@ -90,10 +86,43 @@ var DishSearchComponent = (function () {
         this.applyPlaceFilter();
         this.applyTagFilter();
         this.applyRatingFilter();
+        this.applyTagFilter();
+        this.applyVegetarianFilter();
     };
     DishSearchComponent.prototype.applyPlaceFilter = function () {
+        var self = this;
+        if (this.gplace) {
+            var lat_1 = this.gplace.geometry.location.lat();
+            var lng_1 = this.gplace.geometry.location.lng();
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                var distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, lat_1, lng_1);
+                return distance < 5;
+            });
+        }
+    };
+    DishSearchComponent.prototype.toggleVegetarian = function () {
+        this.vegetarianFilter = !this.vegetarianFilter;
+        this.applyFilters();
+    };
+    DishSearchComponent.prototype.getTagDropdownDisplayName = function () {
+        return this.tagFilter == null ? "Žymės" : this.tagFilter.name;
+    };
+    DishSearchComponent.prototype.getVegetarianButtonClass = function (tagId) {
+        var buttonClass = this.vegetarianFilter ? 'btn-success' : 'btn-default';
+        return buttonClass;
     };
     DishSearchComponent.prototype.applyTagFilter = function () {
+        if (this.tagFilter) {
+            var self_1 = this;
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                for (var i = 0; i < o.tagsIds.length; i++) {
+                    if (self_1.tagFilter.id == o.tagsIds[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
     };
     DishSearchComponent.prototype.applyRatingFilter = function () {
         if (this.ratingFilter) {
@@ -102,6 +131,27 @@ var DishSearchComponent = (function () {
                 return o.ratingAverage >= rating_1;
             });
         }
+    };
+    DishSearchComponent.prototype.applyVegetarianFilter = function () {
+        if (this.vegetarianFilter) {
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                return o.isVegetarian;
+            });
+        }
+    };
+    DishSearchComponent.prototype.getDistanceFromLatLonInKm = function (lat1, lon1, lat2, lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1); // deg2rad below
+        var dLon = this.deg2rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return d;
+    };
+    DishSearchComponent.prototype.deg2rad = function (deg) {
+        return deg * (Math.PI / 180);
     };
     return DishSearchComponent;
 }());

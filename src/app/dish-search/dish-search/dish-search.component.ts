@@ -28,10 +28,10 @@ export class DishSearchComponent implements OnInit {
     dishFilter: string = '';
     placeFilter: string = '';
     cityFilter: ICity = { name: '', lat: null, lng: null };
-    tagFilter: number[] = [];
-    formedFilteredTagName: string = '';
+    tagFilter: ITagListItem = null;
     vegetarianFilter: boolean = false;
     ratingFilter: number = null;
+    gplace: any = null;
 
     optionsModel: number[];
     // myOptions: IMultiSelectOption[];
@@ -69,6 +69,16 @@ export class DishSearchComponent implements OnInit {
         this.dishSearchService.getTagList().subscribe(tags => {
             this.tagList = tags;
         })
+
+        this._mapsAPILoader.load().then(() => {
+            let autocomplete = new google.maps.places.Autocomplete(document.getElementById("placeAutocomplete"), {});
+            google.maps.event.addListener(autocomplete, 'place_changed', () => {
+                this.gplace = autocomplete.getPlace();
+                console.log(this.gplace);
+
+                this.applyFilters();
+            });
+        });
     }
 
     onChange() {
@@ -76,28 +86,11 @@ export class DishSearchComponent implements OnInit {
     }
 
     placeChanged() {
+        if (this.placeFilter.length == 0) {
+            this.gplace = null;
 
-        let self = this;
-
-        this._mapsAPILoader.load().then(() => {
-            let currentLocation = new google.maps.LatLng(54.9008465, 23.9609625);
-            let map = new google.maps.Map(document.createElement('div'));
-            let service = new google.maps.places.PlacesService(map);
-
-            let request = {
-                location: currentLocation,
-                types: ['(cities)'],
-                input: this.cityFilter
-            };
-
-            service.textSearch(request, function (results: any, status: any) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    console.log('god data from google ', results);
-                } else {
-                    console.log('got error from google ', status);
-                }
-            });
-        });
+            this.applyFilters();
+        }
     }
 
     getRatingDisplayName() {
@@ -106,6 +99,12 @@ export class DishSearchComponent implements OnInit {
         } else {
             return 'Reitingas';
         }
+    }
+
+    setTag(tag: ITagListItem) {
+        this.tagFilter = tag;
+
+        this.applyFilters();
     }
 
     setRating(rating: number) {
@@ -120,12 +119,54 @@ export class DishSearchComponent implements OnInit {
         this.applyPlaceFilter();
         this.applyTagFilter();
         this.applyRatingFilter();
+        this.applyTagFilter();
+        this.applyVegetarianFilter();
     }
 
     applyPlaceFilter() {
+        let self = this;
+
+        if (this.gplace) {
+            let lat = this.gplace.geometry.location.lat();
+            let lng = this.gplace.geometry.location.lng();
+
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                let distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, lat, lng);
+                return distance < 5;
+            });
+        }
+    }
+
+    toggleVegetarian() {
+        this.vegetarianFilter = !this.vegetarianFilter;
+
+        this.applyFilters();
+    }
+
+    getTagDropdownDisplayName(){
+        return this.tagFilter == null ? "Žymės" : this.tagFilter.name;
+    }
+
+    getVegetarianButtonClass(tagId: number): string {
+        let buttonClass = this.vegetarianFilter ? 'btn-success' : 'btn-default';
+
+        return buttonClass;
     }
 
     applyTagFilter() {
+        if (this.tagFilter) {
+            let self = this;
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                
+                for (var i = 0; i < o.tagsIds.length; i++) {
+                    if (self.tagFilter.id == o.tagsIds[i]) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+        }
     }
 
     applyRatingFilter() {
@@ -136,5 +177,31 @@ export class DishSearchComponent implements OnInit {
                 return o.ratingAverage >= rating;
             });
         }
+    }
+
+    applyVegetarianFilter() {
+        if (this.vegetarianFilter) {
+            this.filteredDishReviewList = _.filter(this.filteredDishReviewList, function (o) {
+                return o.isVegetarian;
+            });
+        }
+    }
+
+    getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+        var dLon = this.deg2rad(lon2 - lon1);
+        var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return d;
+    }
+
+    deg2rad(deg: number) {
+        return deg * (Math.PI / 180)
     }
 }

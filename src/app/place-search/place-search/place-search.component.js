@@ -13,16 +13,20 @@ var router_1 = require("@angular/router");
 // import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 var tag_service_1 = require("../../tags/tag.service");
 var place_search_service_1 = require("../place-search.service");
+var core_2 = require("angular2-google-maps/core");
 var _ = require("lodash");
 var PlaceSearchComponent = (function () {
-    function PlaceSearchComponent(route, router, placeSearchService, tagService) {
+    function PlaceSearchComponent(route, router, placeSearchService, tagService, _mapsAPILoader) {
         this.route = route;
         this.router = router;
         this.placeSearchService = placeSearchService;
         this.tagService = tagService;
+        this._mapsAPILoader = _mapsAPILoader;
         this.cityFilter = { name: '', lat: null, lng: null };
+        this.placeFilter = '';
         this.placeTypeFilter = null;
         this.ratingFilter = null;
+        this.gplace = null;
     }
     PlaceSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -32,11 +36,26 @@ var PlaceSearchComponent = (function () {
             _this.filteredPlaceReviewList = pageModel.groupedPlacesList;
             console.log(pageModel);
         });
+        this._mapsAPILoader.load().then(function () {
+            var autocomplete = new google.maps.places.Autocomplete(document.getElementById("placeAutocomplete"), {});
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                _this.gplace = autocomplete.getPlace();
+                console.log(_this.gplace);
+                _this.applyFilters();
+            });
+        });
+    };
+    PlaceSearchComponent.prototype.placeChanged = function () {
+        if (this.placeFilter.length == 0) {
+            this.gplace = null;
+            this.applyFilters();
+        }
     };
     PlaceSearchComponent.prototype.onChange = function () {
         console.log(this.optionsModel);
     };
     PlaceSearchComponent.prototype.getPlaceTypeName = function () {
+        console.log('place type id is ', this.placeTypeFilter);
         switch (this.placeTypeFilter) {
             case 1: return 'Restoranas';
             case 2: return 'Kavinė';
@@ -58,6 +77,7 @@ var PlaceSearchComponent = (function () {
     };
     PlaceSearchComponent.prototype.setPlaceType = function (placeTypeId) {
         this.placeTypeFilter = placeTypeId;
+        this.applyFilters();
     };
     PlaceSearchComponent.prototype.setRating = function (rating) {
         this.ratingFilter = rating;
@@ -71,13 +91,14 @@ var PlaceSearchComponent = (function () {
     };
     PlaceSearchComponent.prototype.applyCityFilter = function () {
         var self = this;
-        // if (this.cityFilter && this.cityFilter.lat && this.cityFilter.lng) {
-        //     this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
-        //         let distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, self.cityFilter.lat, self.cityFilter.lng);
-        //         console.log(o.placeName + ' ' + self.cityFilter.name + ' ' + distance);
-        //         return distance < 5;
-        //     });
-        // }
+        if (this.gplace) {
+            var lat_1 = this.gplace.geometry.location.lat();
+            var lng_1 = this.gplace.geometry.location.lng();
+            this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
+                var distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, lat_1, lng_1);
+                return distance < 5;
+            });
+        }
     };
     PlaceSearchComponent.prototype.applyTypeFilter = function () {
         var self = this;
@@ -102,6 +123,20 @@ var PlaceSearchComponent = (function () {
             });
         }
     };
+    PlaceSearchComponent.prototype.getDistanceFromLatLonInKm = function (lat1, lon1, lat2, lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1); // deg2rad below
+        var dLon = this.deg2rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return d;
+    };
+    PlaceSearchComponent.prototype.deg2rad = function (deg) {
+        return deg * (Math.PI / 180);
+    };
     return PlaceSearchComponent;
 }());
 PlaceSearchComponent = __decorate([
@@ -112,7 +147,8 @@ PlaceSearchComponent = __decorate([
     __metadata("design:paramtypes", [router_1.ActivatedRoute,
         router_1.Router,
         place_search_service_1.PlaceSearchService,
-        tag_service_1.TagService])
+        tag_service_1.TagService,
+        core_2.MapsAPILoader])
 ], PlaceSearchComponent);
 exports.PlaceSearchComponent = PlaceSearchComponent;
 //# sourceMappingURL=place-search.component.js.map

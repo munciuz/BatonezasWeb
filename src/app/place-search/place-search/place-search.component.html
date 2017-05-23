@@ -1,7 +1,7 @@
 <nav class="row">
     <ul class="filter-container nav navbar-nav">
 
-        <li class="filter-element"><input type="text" placeholder="Vieta"></li>
+        <li class="filter-element"><input type="text" id="placeAutocomplete" [(ngModel)]="placeFilter" (input)="placeChanged($event.target.value)" placeholder="Vieta"></li>
         <li class="filter-element">
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -44,7 +44,7 @@
 
 <div class="row">
     <div *ngFor="let placeReview of filteredPlaceReviewList" class="col-xs-6 col-sm-4 col-md-3 col-lg-3" [routerLink]="['/placeReviews', placeReview.placeId]">
-        <div class="thumbnail">
+        <div style="min-height: 230px;" class="thumbnail">
             <img class="dish-search-image" src="{{placeReview.imageUri}}" alt="">
             <div class="caption">
                 <h4><a href="#">{{placeReview.placeName}}</a>

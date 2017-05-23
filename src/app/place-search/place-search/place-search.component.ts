@@ -14,6 +14,10 @@ import { IGroupedDishReviewListItem } from "../../shared/models/grouped-dish-rev
 import { PlaceSearchService } from "../place-search.service";
 import { IGroupedPlaceReviewListItem } from "../../shared/models/grouped-place-review-list-item";
 
+import { MapsAPILoader } from 'angular2-google-maps/core';
+
+declare var google: any;
+
 import * as _ from 'lodash';
 
 @Component({
@@ -23,8 +27,10 @@ import * as _ from 'lodash';
 
 export class PlaceSearchComponent implements OnInit {
     cityFilter: ICity = { name: '', lat: null, lng: null };
+    placeFilter: string = '';
     placeTypeFilter: number = null;
     ratingFilter: number = null;
+    gplace: any = null;
 
     optionsModel: number[];
     // myOptions: IMultiSelectOption[];
@@ -43,7 +49,8 @@ export class PlaceSearchComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private placeSearchService: PlaceSearchService,
-        private tagService: TagService) { }
+        private tagService: TagService,
+        private _mapsAPILoader: MapsAPILoader) { }
 
     ngOnInit() {
         this.placeSearchService.getPlaceReviewPageModel()
@@ -53,6 +60,24 @@ export class PlaceSearchComponent implements OnInit {
 
                 console.log(pageModel);
             });
+
+            this._mapsAPILoader.load().then(() => {
+            let autocomplete = new google.maps.places.Autocomplete(document.getElementById("placeAutocomplete"), {});
+            google.maps.event.addListener(autocomplete, 'place_changed', () => {
+                this.gplace = autocomplete.getPlace();
+                console.log(this.gplace);
+
+                this.applyFilters();
+            });
+        });
+    }
+
+    placeChanged() {
+        if (this.placeFilter.length == 0) {
+            this.gplace = null;
+
+            this.applyFilters();
+        }
     }
 
     onChange() {
@@ -60,6 +85,8 @@ export class PlaceSearchComponent implements OnInit {
     }
 
     getPlaceTypeName(){
+        console.log('place type id is ', this.placeTypeFilter);
+
         switch(this.placeTypeFilter){
             case 1: return 'Restoranas';
             case 2: return 'Kavinė';
@@ -81,7 +108,9 @@ export class PlaceSearchComponent implements OnInit {
     }
 
     setPlaceType(placeTypeId: number){
-        this.placeTypeFilter = placeTypeId
+        this.placeTypeFilter = placeTypeId;
+
+        this.applyFilters();
     }
 
     setRating(rating: number) {
@@ -101,15 +130,15 @@ export class PlaceSearchComponent implements OnInit {
     applyCityFilter() {
         let self = this;
 
-        // if (this.cityFilter && this.cityFilter.lat && this.cityFilter.lng) {
-        //     this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
-        //         let distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, self.cityFilter.lat, self.cityFilter.lng);
+        if (this.gplace) {
+            let lat = this.gplace.geometry.location.lat();
+            let lng = this.gplace.geometry.location.lng();
 
-        //         console.log(o.placeName + ' ' + self.cityFilter.name + ' ' + distance);
-
-        //         return distance < 5;
-        //     });
-        // }
+            this.filteredPlaceReviewList = _.filter(this.filteredPlaceReviewList, function (o) {
+                let distance = self.getDistanceFromLatLonInKm(o.lat, o.lng, lat, lng);
+                return distance < 5;
+            });
+        }
     }
 
     applyTypeFilter() {
@@ -139,5 +168,23 @@ export class PlaceSearchComponent implements OnInit {
                 return o.ratingAverage >= rating;
             });
         }
+    }
+
+    getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = this.deg2rad(lat2 - lat1);  // deg2rad below
+        var dLon = this.deg2rad(lon2 - lon1);
+        var a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c; // Distance in km
+        return d;
+    }
+
+    deg2rad(deg: number) {
+        return deg * (Math.PI / 180)
     }
 }
