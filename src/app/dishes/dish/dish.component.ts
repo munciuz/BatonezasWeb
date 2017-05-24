@@ -25,6 +25,7 @@ export class DishComponent implements OnInit {
     isValid: boolean = false;
     isConfirmed: boolean = false;
     result: any;
+    errors: string[] = [];
 
     private sub: Subscription
 
@@ -60,6 +61,10 @@ export class DishComponent implements OnInit {
         )
     }
 
+    hasErrors() {
+        return this.errors.length > 0;
+    }
+
     onBackClicked(): void {
         this.router.navigate(['/dishes']);
     }
@@ -73,26 +78,39 @@ export class DishComponent implements OnInit {
             selectedTags: this.selectedTags,
             allTags: null
         }
-        
-        console.log("on save dish: ", this.dish);
 
-        if (this.dishId == 0) {
-            this.service.createDish(this.dish).subscribe(dishId => {
-                this.result = dishId;
-                this.router.navigate(['/dishes']);
-            }, error => this.errorMessage = <any>error);
-        } else {
-            this.service.editDish(this.dish).subscribe(dishId => {
-                this.result = dishId;
-                this.router.navigate(['/dishes']);
-            }, error => this.errorMessage = <any>error);
+        this.errors = [];
+        this.validate();
+
+        if (this.errors.length === 0) {
+            if (this.dishId == 0) {
+                this.service.createDish(this.dish).subscribe(dishId => {
+                    this.result = dishId;
+                    this.router.navigate(['/dishes']);
+                }, error => this.errorMessage = <any>error);
+            } else {
+                this.service.editDish(this.dish).subscribe(dishId => {
+                    this.result = dishId;
+                    this.router.navigate(['/dishes']);
+                }, error => this.errorMessage = <any>error);
+            }
+        }
+    }
+
+    validate() {
+        if (this.name.length == 0) {
+            this.errors.push("Patiekalo pavadinimas yra privalomas");
+        }
+
+        if (this.selectedTags && this.selectedTags.length == 0){
+            this.errors.push("Būtina nors viena žymė");
         }
     }
 
     getTagButtonClass(tagId: number): string {
         let buttonClass = 'btn btn-success';
 
-        if (!this.isTagSelected(tagId)){
+        if (!this.isTagSelected(tagId)) {
             buttonClass += ' btn-outline';
         }
 
@@ -113,8 +131,8 @@ export class DishComponent implements OnInit {
     }
 
     tagIndex(tagId: number): number {
-        for (var i = 0; i < this.selectedTags.length; i++){
-            if (this.selectedTags[i].id === tagId){
+        for (var i = 0; i < this.selectedTags.length; i++) {
+            if (this.selectedTags[i].id === tagId) {
                 return i;
             }
         }
@@ -123,8 +141,8 @@ export class DishComponent implements OnInit {
     }
 
     isTagSelected(tagId: number): boolean {
-        for (var i = 0; i < this.selectedTags.length; i++){
-            if (this.selectedTags[i].id === tagId){
+        for (var i = 0; i < this.selectedTags.length; i++) {
+            if (this.selectedTags[i].id === tagId) {
                 return true;
             }
         }

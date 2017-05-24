@@ -18,6 +18,7 @@ export class TagComponent implements OnInit {
     name: string = '';
     isValid: boolean = false;
     result: any;
+    errors: string[] = [];
 
     private sub: Subscription
 
@@ -25,6 +26,10 @@ export class TagComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private service: TagService) { }
+
+    hasErrors() {
+        return this.errors.length > 0;
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(
@@ -54,19 +59,28 @@ export class TagComponent implements OnInit {
             id: this.tagId,
             isValid: this.isValid
         }
-        
-        console.log(this.tag);
 
-        if (this.tagId == 0) {
-            this.service.createTag(this.tag).subscribe(tags => {
-                this.result = tags;
-                this.router.navigate(['/tags']);
-            }, error => this.errorMessage = <any>error);
-        } else {
-            this.service.editTag(this.tag).subscribe(tags => {
-                this.result = tags;
-                this.router.navigate(['/tags']);
-            }, error => this.errorMessage = <any>error);
+        this.errors = [];
+        this.validate();
+
+        if (this.errors.length === 0) {
+            if (this.tagId == 0) {
+                this.service.createTag(this.tag).subscribe(tags => {
+                    this.result = tags;
+                    this.router.navigate(['/tags']);
+                }, error => this.errorMessage = <any>error);
+            } else {
+                this.service.editTag(this.tag).subscribe(tags => {
+                    this.result = tags;
+                    this.router.navigate(['/tags']);
+                }, error => this.errorMessage = <any>error);
+            }
+        }
+    }
+
+    validate() {
+        if (this.name.length == 0) {
+            this.errors.push("Žymės pavadinimas yra privalomas");
         }
     }
 }

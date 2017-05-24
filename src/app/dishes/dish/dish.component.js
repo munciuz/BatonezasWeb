@@ -25,6 +25,7 @@ var DishComponent = (function () {
         this.pageTitle = 'Patiekalo administravimas';
         this.isValid = false;
         this.isConfirmed = false;
+        this.errors = [];
     }
     DishComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -49,6 +50,9 @@ var DishComponent = (function () {
             }
         });
     };
+    DishComponent.prototype.hasErrors = function () {
+        return this.errors.length > 0;
+    };
     DishComponent.prototype.onBackClicked = function () {
         this.router.navigate(['/dishes']);
     };
@@ -62,18 +66,29 @@ var DishComponent = (function () {
             selectedTags: this.selectedTags,
             allTags: null
         };
-        console.log("on save dish: ", this.dish);
-        if (this.dishId == 0) {
-            this.service.createDish(this.dish).subscribe(function (dishId) {
-                _this.result = dishId;
-                _this.router.navigate(['/dishes']);
-            }, function (error) { return _this.errorMessage = error; });
+        this.errors = [];
+        this.validate();
+        if (this.errors.length === 0) {
+            if (this.dishId == 0) {
+                this.service.createDish(this.dish).subscribe(function (dishId) {
+                    _this.result = dishId;
+                    _this.router.navigate(['/dishes']);
+                }, function (error) { return _this.errorMessage = error; });
+            }
+            else {
+                this.service.editDish(this.dish).subscribe(function (dishId) {
+                    _this.result = dishId;
+                    _this.router.navigate(['/dishes']);
+                }, function (error) { return _this.errorMessage = error; });
+            }
         }
-        else {
-            this.service.editDish(this.dish).subscribe(function (dishId) {
-                _this.result = dishId;
-                _this.router.navigate(['/dishes']);
-            }, function (error) { return _this.errorMessage = error; });
+    };
+    DishComponent.prototype.validate = function () {
+        if (this.name.length == 0) {
+            this.errors.push("Patiekalo pavadinimas yra privalomas");
+        }
+        if (this.selectedTags && this.selectedTags.length == 0) {
+            this.errors.push("Būtina nors viena žymė");
         }
     };
     DishComponent.prototype.getTagButtonClass = function (tagId) {

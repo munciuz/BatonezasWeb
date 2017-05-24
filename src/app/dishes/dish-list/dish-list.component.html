@@ -20,9 +20,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let dish of dishList' [routerLink]="['/dish', dish.id]" [class]="getTableRowClass(dish)">
-                        <td>
-                            <a>{{dish.name}}</a>
-                        </td>
+                        <td>{{dish.name}}</td>
                         <td><input disabled type="checkbox" [checked]="dish.isConfirmed" /></td>
                         <td><input disabled type="checkbox" [checked]="dish.isValid" /></td>
                         <td>{{dish.createdByUser}}</td>

@@ -19,7 +19,11 @@ var TagComponent = (function () {
         this.pageTitle = 'Žymės administravimas';
         this.name = '';
         this.isValid = false;
+        this.errors = [];
     }
+    TagComponent.prototype.hasErrors = function () {
+        return this.errors.length > 0;
+    };
     TagComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
@@ -44,18 +48,26 @@ var TagComponent = (function () {
             id: this.tagId,
             isValid: this.isValid
         };
-        console.log(this.tag);
-        if (this.tagId == 0) {
-            this.service.createTag(this.tag).subscribe(function (tags) {
-                _this.result = tags;
-                _this.router.navigate(['/tags']);
-            }, function (error) { return _this.errorMessage = error; });
+        this.errors = [];
+        this.validate();
+        if (this.errors.length === 0) {
+            if (this.tagId == 0) {
+                this.service.createTag(this.tag).subscribe(function (tags) {
+                    _this.result = tags;
+                    _this.router.navigate(['/tags']);
+                }, function (error) { return _this.errorMessage = error; });
+            }
+            else {
+                this.service.editTag(this.tag).subscribe(function (tags) {
+                    _this.result = tags;
+                    _this.router.navigate(['/tags']);
+                }, function (error) { return _this.errorMessage = error; });
+            }
         }
-        else {
-            this.service.editTag(this.tag).subscribe(function (tags) {
-                _this.result = tags;
-                _this.router.navigate(['/tags']);
-            }, function (error) { return _this.errorMessage = error; });
+    };
+    TagComponent.prototype.validate = function () {
+        if (this.name.length == 0) {
+            this.errors.push("Žymės pavadinimas yra privalomas");
         }
     };
     return TagComponent;

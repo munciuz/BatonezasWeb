@@ -2,6 +2,9 @@
     <div class="panel-heading">
         {{pageTitle}}
     </div>
+    <div *ngIf="hasErrors()" class="alert alert-danger">
+        <strong>Klaida!</strong> <p *ngFor="let error of errors">{{error}}</p>
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-1 col-sm-2 col-xs-3">
