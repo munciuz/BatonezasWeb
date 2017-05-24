@@ -92,7 +92,10 @@ export class DishComponent implements OnInit {
                 this.service.editDish(this.dish).subscribe(dishId => {
                     this.result = dishId;
                     this.router.navigate(['/dishes']);
-                }, error => this.errorMessage = <any>error);
+                }, error => {
+                    // this.errorMessage = <any>error;
+                    console.log(error);
+                });
             }
         }
     }

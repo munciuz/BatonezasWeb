@@ -42,7 +42,10 @@ var DishService = (function () {
         console.log('this is dish service before editing data: ', dish);
         return this.http.post(this.apis.Dish.Edit, dish)
             .map(function (res) { return res.json(); })
-            .catch(function (error) { return Observable_1.Observable.throw(error.json().error || 'Server error'); });
+            .catch(function (error) {
+            console.log(error);
+            return Observable_1.Observable.throw(error.json().error || 'Server error');
+        });
     };
     DishService.prototype.handleError = function (error) {
         return Observable_1.Observable.throw(error.json().error || 'Server error');

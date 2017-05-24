@@ -79,7 +79,10 @@ var DishComponent = (function () {
                 this.service.editDish(this.dish).subscribe(function (dishId) {
                     _this.result = dishId;
                     _this.router.navigate(['/dishes']);
-                }, function (error) { return _this.errorMessage = error; });
+                }, function (error) {
+                    // this.errorMessage = <any>error;
+                    console.log(error);
+                });
             }
         }
     };

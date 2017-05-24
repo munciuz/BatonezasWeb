@@ -42,7 +42,10 @@ export class DishService {
         console.log('this is dish service before editing data: ', dish);
         return this.http.post(this.apis.Dish.Edit, dish) 
             .map((res: Response) => res.json()) 
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); 
+            .catch((error: any) => {
+                console.log(error);
+                return Observable.throw(error.json().error || 'Server error');
+            }); 
     }
 
     private handleError(error: Response) {
