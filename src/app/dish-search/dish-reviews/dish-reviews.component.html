@@ -22,7 +22,7 @@
         <div class="row"><b><h3>{{gdetails?.name}}</h3></b></div>
         <div class="row">{{gdetails?.vicinity}}</div>
         <div class="row">{{gdetails.international_phone_number}}</div>
-        <div class="row"><a href="http://www.facebook.com/grilllondon" target="_blank">{{formatWebsite(gdetails.website)}}</a></div>
+        <div class="row"><a [href]="gdetails.website" target="_blank">{{formatWebsite(gdetails.website)}}</a></div>
         <br>
         <div *ngIf="gdetails.opening_hours">
             <comp-work-hours [openingHours]="gdetails.opening_hours"></comp-work-hours>
