@@ -88,6 +88,9 @@ var DishSearchComponent = (function () {
         this.applyRatingFilter();
         this.applyTagFilter();
         this.applyVegetarianFilter();
+        // if (this.filteredDishReviewList.length > 40){
+        //     this.filteredDishReviewList = this.filteredDishReviewList.slice(0, 40);
+        // }
     };
     DishSearchComponent.prototype.applyPlaceFilter = function () {
         var self = this;

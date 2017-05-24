@@ -125,6 +125,10 @@ export class PlaceSearchComponent implements OnInit {
         this.applyCityFilter();
         this.applyTypeFilter();
         this.applyRatingFilter();
+
+        // if (this.filteredPlaceReviewList.length > 40){
+        //     this.filteredPlaceReviewList = this.filteredPlaceReviewList.slice(0, 40);
+        // }
     }
 
     applyCityFilter() {

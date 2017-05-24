@@ -88,6 +88,9 @@ var PlaceSearchComponent = (function () {
         this.applyCityFilter();
         this.applyTypeFilter();
         this.applyRatingFilter();
+        // if (this.filteredPlaceReviewList.length > 40){
+        //     this.filteredPlaceReviewList = this.filteredPlaceReviewList.slice(0, 40);
+        // }
     };
     PlaceSearchComponent.prototype.applyCityFilter = function () {
         var self = this;
