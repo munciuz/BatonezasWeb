@@ -27,6 +27,7 @@ var PlaceReviewComponent = (function () {
         this.lng = 7.809007;
         this.gdetails = {};
         this.isAdmin = false;
+        this.shareUrl = "http://localhost:3000/dishReviews/19/18";
     }
     PlaceReviewComponent.prototype.ngOnInit = function () {
         var _this = this;

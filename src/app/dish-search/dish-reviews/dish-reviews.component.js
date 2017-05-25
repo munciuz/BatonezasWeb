@@ -26,12 +26,14 @@ var DishReviewComponent = (function () {
         this.gdetails = {};
         this.isAdmin = false;
         this.dishName = '';
+        this.shareUrl = "";
     }
     DishReviewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.route.params.subscribe(function (params) {
             _this.dishId = params['dishId'];
             _this.placeId = params['placeId'];
+            _this.shareUrl = "http://localhost:3000/dishReviews/19/18";
             _this.loadData();
         });
         this.isAdmin = window.localStorage.getItem('roleId') == '1';

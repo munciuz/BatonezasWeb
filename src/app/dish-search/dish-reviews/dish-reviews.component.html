@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
         <div class="row">
-            <h3>{{dishName}}</h3>
+            <h3>{{dishName}}
+                <img class="facebook-icon" ceiboShare [facebook]="{u: shareUrl}" src="https://facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/fb-art.png">
+            </h3>
         </div>
         <div *ngFor="let dishReview of dishReviews" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="thumbnail">

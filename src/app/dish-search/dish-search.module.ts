@@ -12,6 +12,8 @@ import { DishSearchFilterPipe } from "./dish-search/dish-search.pipe";
 // import { WorkHoursComponent } from "../shared/components/work-hours.component";
 // import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
+// import { CeiboShare } from 'ng2-social-share';
+
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({

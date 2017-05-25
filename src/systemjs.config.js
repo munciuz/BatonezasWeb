@@ -34,7 +34,8 @@
       'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
       // 'angular-2-dropdown-multiselect': 'npm:angular-2-dropdown-multiselect',
       // 'ng2-dropdown-multiselect': 'npm:ng2-dropdown-multiselect'
-      'lodash': 'npm:lodash'
+      'lodash': 'npm:lodash',
+      'ng2-social-share': 'npm:ng2-social-share'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -56,6 +57,10 @@
       'lodash': {
         "defaultExtension": 'js',
         "main": 'index.js'
+      },
+      'ng2-social-share': {
+        "defaultExtension": 'js',
+        "main": 'ng2-social-share.js'
       },
       // 'ng2-dropdown-multiselect': {
       //   "main": 'dis/index.js',

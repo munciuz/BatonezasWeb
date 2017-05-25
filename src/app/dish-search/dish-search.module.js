@@ -17,6 +17,7 @@ var core_module_1 = require("angular2-google-maps/core/core-module");
 var dish_search_pipe_1 = require("./dish-search/dish-search.pipe");
 // import { WorkHoursComponent } from "../shared/components/work-hours.component";
 // import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+// import { CeiboShare } from 'ng2-social-share';
 var shared_module_1 = require("../shared/shared.module");
 var DishSearchModule = (function () {
     function DishSearchModule() {

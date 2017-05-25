@@ -31,6 +31,7 @@ export class PlaceReviewComponent implements OnInit {
     lng: number = 7.809007;
     gdetails: any = {};
     isAdmin: boolean = false;
+    shareUrl = "http://localhost:3000/dishReviews/19/18";
 
     placeReviews: IPlaceReviewListItem[];
 

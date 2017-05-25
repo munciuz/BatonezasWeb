@@ -34,6 +34,8 @@ export class DishReviewComponent implements OnInit {
 
     dishReviews: IDishReviewListItem[];
 
+    shareUrl: string = "";
+
     private sub: Subscription
 
     constructor(
@@ -48,6 +50,8 @@ export class DishReviewComponent implements OnInit {
             params => {
                 this.dishId = params['dishId'];
                 this.placeId = params['placeId'];
+
+                this.shareUrl = "http://localhost:3000/dishReviews/19/18";
 
                 this.loadData();
             }

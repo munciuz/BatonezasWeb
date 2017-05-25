@@ -16,7 +16,13 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-        <div class="row"><b><h3>{{gdetails?.name}}</h3></b></div>
+        <div class="row">
+            <b>
+                <h3>{{gdetails?.name}}
+            <img class="facebook-icon" ceiboShare [facebook]="{u: shareUrl}" src="https://facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/fb-art.png">
+            </h3>
+            </b>
+        </div>
         <div class="row">{{gdetails?.vicinity}}</div>
         <div class="row">{{gdetails.international_phone_number}}</div>
         <div class="row"><a [href]="gdetails.website" target="_blank">{{formatWebsite(gdetails.website)}}</a></div>
