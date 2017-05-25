@@ -25,6 +25,15 @@ var TagService = (function () {
             .map(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    TagService.prototype.getFilteredTagList = function (includeInvalid) {
+        var url = this.apis.Tag.GetAll;
+        // if (includeInvalid){
+        url += "?includeInvalid=true";
+        // }
+        return this.http.get(url)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     TagService.prototype.getTag = function (id) {
         return this.http.get(this.apis.Tag.Get + id)
             .map(function (response) { return response.json(); })

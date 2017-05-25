@@ -18,7 +18,7 @@ var TagListComponent = (function () {
     }
     TagListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.tagService.getTagList()
+        this.tagService.getFilteredTagList(true)
             .subscribe(function (dishTypes) { return _this.tagList = dishTypes; }, function (error) { return _this.errorMessage = error; });
     };
     return TagListComponent;

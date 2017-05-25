@@ -23,6 +23,18 @@ export class TagService {
             .catch(this.handleError);
     }
 
+    getFilteredTagList(includeInvalid: boolean): Observable<ITagListItem[]> {
+        var url = this.apis.Tag.GetAll;
+
+        // if (includeInvalid){
+            url += "?includeInvalid=true";
+        // }
+
+        return this.http.get(url)
+            .map((response: Response) => <ITagListItem[]>response.json())
+            .catch(this.handleError);
+    }
+
     getTag(id: number): Observable<ITag> {
         return this.http.get(this.apis.Tag.Get + id)
             .map((response: Response) => <ITag>response.json())

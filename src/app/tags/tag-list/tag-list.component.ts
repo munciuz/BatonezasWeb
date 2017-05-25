@@ -19,7 +19,7 @@ export class TagListComponent implements OnInit {
     constructor(private tagService: TagService) { }
 
     ngOnInit(): void {
-        this.tagService.getTagList()
+        this.tagService.getFilteredTagList(true)
             .subscribe(dishTypes => this.tagList = dishTypes,
             error => this.errorMessage = <any>error);
     }
